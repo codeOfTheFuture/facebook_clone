@@ -1,11 +1,12 @@
 import React from "react";
+import Header from "./components/Header";
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <div className='App'>
-      <h1>Facebook Clone</h1>
-      {/*  Header  */}
+    <div className='App' data-test='component-app'>
+      <Header />
+
       <main>
         {/*  Sidebar  */}
         {/*  Feed  */}
