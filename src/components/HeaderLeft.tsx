@@ -1,11 +1,12 @@
 import React from "react";
 import HeaderLogo from "./HeaderLogo";
+import HeaderSearch from "./HeaderSearch";
 
 const HeaderLeft: React.FC = () => {
   return (
-    <div data-test='component-header-left'>
+    <div className='flex items-center' data-test='component-header-left'>
       <HeaderLogo />
-      {/* Header Search */}
+      <HeaderSearch />
     </div>
   );
 };
