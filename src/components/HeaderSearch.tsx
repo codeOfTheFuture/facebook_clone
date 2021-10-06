@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderInput from "./HeaderInput";
 
-import { SearchIcon } from "@heroicons/react/outline";
+import { SearchIcon } from "@heroicons/react/solid";
 
 const HeaderSearch: React.FC = () => {
   return (

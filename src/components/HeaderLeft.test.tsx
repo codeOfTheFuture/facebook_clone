@@ -3,6 +3,8 @@ import HeaderLeft from "./HeaderLeft";
 
 test("renders header left component without error", () => {
   const wrapper = shallow(<HeaderLeft />);
-  const headerComponent = wrapper.find("[data-test='component-header-left']");
-  expect(headerComponent.length).toBe(1);
+  const headerLeftComponent = wrapper.find(
+    "[data-test='component-header-left']"
+  );
+  expect(headerLeftComponent.length).toBe(1);
 });
