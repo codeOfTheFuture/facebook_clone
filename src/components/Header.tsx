@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderLeft from "./HeaderLeft";
 import HeaderCenter from "./HeaderCenter";
+import HeaderRight from "./HeaderRight";
 
 const Header: React.FC = () => {
   return (
@@ -10,8 +11,7 @@ const Header: React.FC = () => {
     >
       <HeaderLeft />
       <HeaderCenter />
-
-      {/* Right */}
+      <HeaderRight />
     </div>
   );
 };
