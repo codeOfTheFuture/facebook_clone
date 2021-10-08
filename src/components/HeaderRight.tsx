@@ -8,7 +8,10 @@ import {
 
 const HeaderRight: React.FC = () => {
   return (
-    <div className='flex items-center sm:space-x-2 justify-end'>
+    <div
+      className='flex items-center sm:space-x-2 justify-end'
+      data-test='component-header-right'
+    >
       {/* Profile Pic */}
 
       <p className='whitespace-nowrap font-semibold pr-3'>Jeff Oliver</p>

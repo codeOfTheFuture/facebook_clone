@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { auth } from "../firebase.setup";
 
@@ -13,5 +13,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  const memoedValue = useMemo(() => ({ user }), [user]);
+
+  return (
+    <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>
+  );
 };
