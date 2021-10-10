@@ -1,25 +1,25 @@
 import React, { FormEvent } from "react";
-import { RouteComponentProps } from "react-router";
-import { getAuth, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import { useAuth } from "../context/AuthContext";
+import { useHistory, Redirect } from "react-router-dom";
 
-const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const signInWithFaceBook = async (e: FormEvent) => {
+const Login: React.FC = () => {
+  const { signInWithFacebook, user } = useAuth();
+  const history = useHistory();
+
+  // Handle Sign In
+  const handleSignIn = async (e: FormEvent) => {
     e.preventDefault();
-
-    console.log("it works");
     try {
-      const provider = new FacebookAuthProvider(),
-        auth = getAuth();
-
-      await signInWithPopup(auth, provider);
-
+      await signInWithFacebook();
       history.push("/");
     } catch (error) {
       console.log(error);
     }
   };
 
-  return (
+  return user ? (
+    <Redirect to='/' />
+  ) : (
     <div className='grid place-items-center mt-5' data-test='page-login'>
       <img
         className='object-contain my-10'
@@ -28,7 +28,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
         height={400}
         width={400}
       />
-      <form onSubmit={signInWithFaceBook}>
+      <form onSubmit={handleSignIn}>
         <button
           className='p-5 bg-blue-500 rounded-full text-white text-center cursor-pointer uppercase'
           type='submit'

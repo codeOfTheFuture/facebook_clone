@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <div className='App' data-test='component-app'>
       <Switch>
         <ProtectedRoute exact path='/' component={Home} />
-        <Route exact path='/login' render={(props) => <Login {...props} />} />
+        <Route exact path='/login' render={() => <Login />} />
       </Switch>
     </div>
   );

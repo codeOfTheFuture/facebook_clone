@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Main from "../components/Main";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const Home: React.FC = () => {
-  const user = useContext(AuthContext);
+  const user = useAuth();
   console.log(user);
   return (
     <div data-test='page-home'>
