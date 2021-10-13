@@ -1,15 +1,33 @@
 import React, { FormEvent, ChangeEvent, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  addDoc,
+  setDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "../firebase.setup";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
 import { EmojiHappyIcon } from "@heroicons/react/outline";
 import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
 
 const InputBox: React.FC = () => {
   const { user } = useAuth(),
+    storage = getStorage(),
     inputRef = useRef<HTMLInputElement>(null),
     filePickerRef = useRef<HTMLInputElement>(null),
     [imageToPost, setImageToPost] = useState<string | null>(null);
+
+  // Set image state back to null
+  const removeImage = () => {
+    setImageToPost(null);
+  };
 
   // Send Post
   const sendPost = async (e: FormEvent) => {
@@ -18,7 +36,8 @@ const InputBox: React.FC = () => {
     if (!inputRef.current!.value) return;
 
     try {
-      await addDoc(collection(db, "posts"), {
+      // Adds a new doc to firestore db collection `posts` as a promise
+      const newDoc = await addDoc(collection(db, "posts"), {
         message: inputRef.current!.value,
         name: user.displayName,
         email: user.email,
@@ -26,10 +45,35 @@ const InputBox: React.FC = () => {
         timestamp: serverTimestamp(),
       });
 
-      inputRef.current!.value = "";
+      // If an image has been set in state
+      if (imageToPost) {
+        // Creates a reference for storage bucket
+        const storageRef = ref(storage, `posts/${newDoc.id}`);
+
+        // Returns an upload task as a promise
+        await uploadString(storageRef, imageToPost, "data_url");
+
+        // Gets a download url as a promise
+        const url = await getDownloadURL(storageRef);
+
+        // Creates a reference to the doc just created
+        const postsRef = doc(db, "posts", newDoc.id);
+
+        // Updates doc with url from storage bucket as a promise
+        await setDoc(
+          postsRef,
+          {
+            postImage: url,
+          },
+          { merge: true }
+        );
+      }
     } catch (error) {
       console.log(error);
     }
+
+    inputRef.current!.value = "";
+    removeImage();
   };
 
   // Add Image to Post
@@ -42,11 +86,6 @@ const InputBox: React.FC = () => {
     reader.onload = (readerEvent) => {
       setImageToPost(readerEvent.target!.result as string);
     };
-  };
-
-  // Set image state back to null
-  const removeImage = () => {
-    setImageToPost(null);
   };
 
   return (
