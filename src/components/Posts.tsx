@@ -24,19 +24,17 @@ const Posts: React.FC = () => {
     <div>
       {posts?.map((post: DocumentData) => {
         return (
-          post.data().timestamp && (
-            <Post
-              key={post.id}
-              name={post.data().name}
-              message={post.data().message}
-              email={post.data().email}
-              timestamp={new Date(
-                post.data().timestamp.toDate()
-              ).toLocaleString()}
-              image={post.data().image}
-              postImage={post.data().postImage}
-            />
-          )
+          <Post
+            key={post.id}
+            name={post.data().name}
+            message={post.data().message}
+            email={post.data().email}
+            timestamp={new Date(
+              post.data().timestamp?.toDate()
+            ).toLocaleString()}
+            image={post.data().image}
+            postImage={post.data().postImage}
+          />
         );
       })}
     </div>
