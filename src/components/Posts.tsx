@@ -21,7 +21,7 @@ const Posts: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className='w-3/4'>
       {posts?.map((post: DocumentData) => {
         return (
           <Post

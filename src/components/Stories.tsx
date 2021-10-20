@@ -4,7 +4,7 @@ import stories from "../data/storiesData";
 
 const Stories: React.FC = () => {
   return (
-    <div className='flex justify-center space-x-3 w-auto mx-auto'>
+    <div className='flex justify-center space-x-1 w-auto mx-auto'>
       {stories.map((story) => (
         <StoryCard
           key={story.id}
