@@ -26,17 +26,20 @@ const HeaderRight: React.FC = () => {
       className='flex items-center sm:space-x-2 justify-end'
       data-test='component-header-right'
     >
-      {/* Profile Pic */}
-      <img
-        src={user.photoURL}
-        alt=''
-        width={40}
-        height={40}
-        className='rounded-full cursor-pointer'
-        onClick={handleLogOut}
-      />
+      <div className='flex items-center sm:space-x-2 hover:bg-gray-200 rounded-full p-2 cursor-pointer'>
+        <img
+          src={user.photoURL}
+          alt=''
+          width={30}
+          height={30}
+          className='rounded-full'
+          onClick={handleLogOut}
+        />
 
-      <p className='whitespace-nowrap font-semibold pr-3'>{user.displayName}</p>
+        <p className='whitespace-nowrap font-semibold pr-3'>
+          {user.displayName.split(" ")[0]}
+        </p>
+      </div>
 
       <ViewGridIcon className='icon' />
       <ChatIcon className='icon' />
