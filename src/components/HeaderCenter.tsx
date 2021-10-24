@@ -7,11 +7,32 @@ const HeaderCenter: React.FC = () => {
   return (
     <div className='flex justify-center flex-grow'>
       <div className='flex space-x-6 md:space-x-2'>
-        <HeaderIcon Icon={HomeIcon} active={true} />
-        <HeaderIcon Icon={FlagIcon} active={false} />
-        <HeaderIcon Icon={PlayIcon} active={false} />
-        <HeaderIcon Icon={ShoppingCartIcon} active={false} />
-        <HeaderIcon Icon={UserGroupIcon} active={false} />
+        <HeaderIcon
+          Icon={HomeIcon}
+          iconClassName={"headerIconCenter"}
+          iconContainerClassName={"headerIconContainer"}
+          active
+        />
+        <HeaderIcon
+          Icon={FlagIcon}
+          iconClassName={"headerIconCenter"}
+          iconContainerClassName={"headerIconContainer"}
+        />
+        <HeaderIcon
+          Icon={PlayIcon}
+          iconClassName={"headerIconCenter"}
+          iconContainerClassName={"headerIconContainer"}
+        />
+        <HeaderIcon
+          Icon={ShoppingCartIcon}
+          iconClassName={"headerIconCenter"}
+          iconContainerClassName={"headerIconContainer"}
+        />
+        <HeaderIcon
+          Icon={UserGroupIcon}
+          iconClassName={"headerIconCenter"}
+          iconContainerClassName={"headerIconContainer"}
+        />
       </div>
     </div>
   );
