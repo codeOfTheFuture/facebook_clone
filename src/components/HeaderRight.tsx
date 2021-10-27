@@ -53,10 +53,12 @@ const HeaderRight: React.FC = () => {
         </p>
       </div>
 
-      <HeaderIcon Icon={ViewGridIcon} iconClassName={"headerIconRight"} />
-      <HeaderIcon Icon={ChatIcon} iconClassName={"headerIconRight"} />
-      <HeaderIcon Icon={BellIcon} iconClassName={"headerIconRight"} />
-      <HeaderIcon Icon={ChevronDownIcon} iconClassName={"headerIconRight"} />
+      <HeaderIcon Icon={ViewGridIcon} iconClassName={"headerIconRight"} tooltipClassName={'toolTipMenu'} tooltipName={'Menu'} />
+      <HeaderIcon Icon={ChatIcon} iconClassName={"headerIconRight"} tooltipClassName={'toolTipMessenger'} tooltipName={'Messenger'} />
+      <HeaderIcon Icon={BellIcon} iconClassName={"headerIconRight"} tooltipClassName={'toolTipNotifications'} tooltipName={'Notifications'} />
+      <HeaderIcon Icon={ChevronDownIcon} iconClassName={"headerIconRight"}
+        tooltipClassName={'toolTipAccount'} tooltipName={'Account'}
+      />
 
       {/* <ViewGridIcon className='headerIconRight' />
       <ChatIcon className='headerIconRight' />

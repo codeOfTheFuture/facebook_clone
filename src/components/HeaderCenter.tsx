@@ -1,6 +1,6 @@
 import React from "react";
 import { HomeIcon, UserGroupIcon } from "@heroicons/react/solid";
-import { FlagIcon, PlayIcon, ShoppingCartIcon } from "@heroicons/react/outline";
+import { FlagIcon, PlayIcon, CubeIcon } from "@heroicons/react/outline";
 import HeaderIcon from "./HeaderIcon";
 
 const HeaderCenter: React.FC = () => {
@@ -11,27 +11,37 @@ const HeaderCenter: React.FC = () => {
           Icon={HomeIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
+          tooltipClassName={'toolTipCenter'}
+          tooltipName={'Home'}
           active
         />
         <HeaderIcon
           Icon={FlagIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
+          tooltipClassName={'toolTipCenter'}
+          tooltipName={'Pages'}
         />
         <HeaderIcon
           Icon={PlayIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
-        />
-        <HeaderIcon
-          Icon={ShoppingCartIcon}
-          iconClassName={"headerIconCenter"}
-          iconContainerClassName={"headerIconContainer"}
+          tooltipClassName={'toolTipCenter'}
+          tooltipName={'Watch'}
         />
         <HeaderIcon
           Icon={UserGroupIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
+          tooltipClassName={'toolTipCenter'}
+          tooltipName={'Groups'}
+        />
+        <HeaderIcon
+          Icon={CubeIcon}
+          iconClassName={"headerIconCenter"}
+          iconContainerClassName={"headerIconContainer"}
+          tooltipClassName={'toolTipCenter'}
+          tooltipName={'Gaming'}
         />
       </div>
     </div>
