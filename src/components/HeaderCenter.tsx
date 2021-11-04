@@ -5,8 +5,8 @@ import HeaderIcon from "./HeaderIcon";
 
 const HeaderCenter: React.FC = () => {
   return (
-    <div className='flex justify-center flex-grow'>
-      <div className='flex space-x-6 md:space-x-2'>
+    <div className='flex lg:justify-center flex-grow'>
+      <div className='hidden lg:flex space-x-6 md:space-x-2'>
         <HeaderIcon
           Icon={HomeIcon}
           iconClassName={"headerIconCenter"}

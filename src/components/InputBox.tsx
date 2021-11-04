@@ -104,9 +104,8 @@ const InputBox: React.FC = () => {
               className='rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none'
               type='text'
               ref={inputRef}
-              placeholder={`What's on your mind, ${
-                user.displayName.split(" ")[0]
-              }?`}
+              placeholder={`What's on your mind, ${user.displayName.split(" ")[0]
+                }?`}
             />
           </div>
 
@@ -143,7 +142,7 @@ const InputBox: React.FC = () => {
               hidden
             />
           </div>
-          <div className='inputIcon'>
+          <div className='inputIcon hidden sm:flex'>
             <EmojiHappyIcon className='h-7 text-yellow-300' />
             <p className='text-xs sm:text-sm xl:text-base'>Feeling/Activity</p>
           </div>

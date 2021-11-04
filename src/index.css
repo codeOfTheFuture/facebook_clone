@@ -23,23 +23,23 @@
   .toolTipNotifications,
   .toolTipMessenger,
   .toolTipMenu {
-    @apply hidden md:inline-block absolute top-10 p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
+    @apply hidden md:inline-block absolute top-8 p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
   }
 
   .toolTipAccount {
-    @apply right-[0.90rem];
+    @apply right-[-0.4rem];
   }
 
   .toolTipNotifications {
-    @apply right-[3.2rem];
+    @apply right-[-1.2rem];
   }
 
   .toolTipMessenger {
-    @apply right-[6.4rem];
+    @apply right-[-0.8rem];
   }
 
   .toolTipMenu {
-    @apply right-[10.4rem];
+    @apply right-[0rem];
   }
 
   .toolTipCenterRight {
@@ -48,5 +48,24 @@
 
   .inputIcon {
     @apply flex items-center space-x-3 hover:bg-gray-100 flex-grow justify-center p-2 rounded-xl cursor-pointer;
+  }
+
+  .dropdownProfileBtn {
+    @apply flex items-center justify-start w-80 rounded-lg h-16 p-2 mb-2 bg-white hover:bg-gray-200 cursor-pointer;
+  }
+  .dropdownFeedbackBtn {
+    @apply flex items-center justify-start w-80 rounded-lg h-16 p-1 my-2 bg-white hover:bg-gray-200 cursor-pointer;
+  }
+
+  .dropdownBtn {
+    @apply flex items-center justify-start w-80 rounded-lg h-14 my-2 bg-white hover:bg-gray-200 cursor-pointer;
+  }
+
+  .menuIconContainer {
+    @apply flex xl:hidden;
+  }
+
+  .menuIcon {
+    @apply h-8 mr-1 text-gray-400;
   }
 }
