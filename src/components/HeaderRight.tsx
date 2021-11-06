@@ -6,26 +6,16 @@ import {
   ViewGridIcon,
   MenuIcon,
 } from "@heroicons/react/solid";
-import { useAuth } from "../context/AuthContext";
-import { useHistory } from "react-router-dom";
 import HeaderIcon from "./HeaderIcon";
-
+import { useAuth } from "../context/AuthContext";
 import useClickOutside from "../hooks/useClickOutside";
 
 const HeaderRight: React.FC = () => {
-  const { user, logOut } = useAuth();
-  const history = useHistory();
+  const { user } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<any>(null);
 
-  const handleLogOut = async () => {
-    try {
-      await logOut();
-      history.push("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   const handleClick = () => {
     setDropdownOpen((prevState) => !prevState);
@@ -55,7 +45,6 @@ const HeaderRight: React.FC = () => {
           width={30}
           height={30}
           className='rounded-full'
-          onClick={handleLogOut}
         />
 
         <p className='whitespace-nowrap font-semibold pr-3'>

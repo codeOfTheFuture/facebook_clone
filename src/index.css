@@ -42,7 +42,7 @@
   }
 
   .dropdownBtn {
-    @apply flex items-center justify-start w-80 rounded-lg h-14 my-2 bg-white hover:bg-gray-200 cursor-pointer;
+    @apply flex items-center justify-between w-80 rounded-lg h-14 my-2 bg-white hover:bg-gray-200 cursor-pointer;
   }
 
   .menuIconContainer {
