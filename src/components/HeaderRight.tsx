@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   BellIcon,
   ChatIcon,
@@ -10,10 +10,13 @@ import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import HeaderIcon from "./HeaderIcon";
 
+import useClickOutside from "../hooks/useClickOutside";
+
 const HeaderRight: React.FC = () => {
   const { user, logOut } = useAuth();
   const history = useHistory();
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<any>(null);
 
   const handleLogOut = async () => {
     try {
@@ -26,7 +29,11 @@ const HeaderRight: React.FC = () => {
 
   const handleClick = () => {
     setDropdownOpen((prevState) => !prevState);
-  }
+  };
+
+  useClickOutside(dropdownRef, () => {
+    setDropdownOpen(false);
+  });
 
   return (
     <div
@@ -37,8 +44,8 @@ const HeaderRight: React.FC = () => {
         Icon={MenuIcon}
         iconClassName={"menuIcon"}
         iconContainerClassName={"menuIconContainer"}
-        tooltipClassName={'toolTipCenter'}
-        tooltipName={'Home'}
+        tooltipClassName={"toolTipCenter"}
+        tooltipName={"Home"}
       />
 
       <div className='flex items-center sm:space-x-2 p-1 hover:bg-gray-200 rounded-full cursor-pointer'>
@@ -56,12 +63,28 @@ const HeaderRight: React.FC = () => {
         </p>
       </div>
 
-      <HeaderIcon Icon={ViewGridIcon} iconClassName={"headerIconRight"} tooltipClassName={'toolTipMenu'} tooltipName={'Menu'} />
-      <HeaderIcon Icon={ChatIcon} iconClassName={"headerIconRight"} tooltipClassName={'toolTipMessenger'} tooltipName={'Messenger'} />
-      <HeaderIcon Icon={BellIcon} iconClassName={"headerIconRight"} tooltipClassName={'toolTipNotifications'} tooltipName={'Notifications'} />
-      <HeaderIcon Icon={ChevronDownIcon} iconClassName={"headerIconRight"}
-        tooltipClassName={'toolTipAccount'} tooltipName={'Account'}
-        handleClick={handleClick} dropdownOpen={dropdownOpen}
+      <HeaderIcon
+        Icon={ViewGridIcon}
+        iconClassName={"headerIconRight"}
+        tooltipName={"Menu"}
+      />
+      <HeaderIcon
+        Icon={ChatIcon}
+        iconClassName={"headerIconRight"}
+        tooltipName={"Messenger"}
+      />
+      <HeaderIcon
+        Icon={BellIcon}
+        iconClassName={"headerIconRight"}
+        tooltipName={"Notifications"}
+      />
+      <HeaderIcon
+        Icon={ChevronDownIcon}
+        iconClassName={"headerIconRight"}
+        tooltipName={"Account"}
+        handleClick={handleClick}
+        dropdownOpen={dropdownOpen}
+        dropdownRef={dropdownRef}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { AnnotationIcon, CogIcon, QuestionMarkCircleIcon, MoonIcon, LogoutIcon }
 
 const HeaderDropdownAccount = () => {
   return (
-    <>
+    <div>
       <HeaderDropdownButton className='dropdownProfileBtn' img='https://graph.facebook.com/6372305086142776/picture' heading='Jeff Oliver' text='See your profile' />
       <hr />
       <HeaderDropdownButton className='dropdownFeedbackBtn' Icon={AnnotationIcon} heading='Give feedback' text='Help us improve the new Facebook' />
@@ -13,7 +13,7 @@ const HeaderDropdownAccount = () => {
       <HeaderDropdownButton className='dropdownBtn' Icon={QuestionMarkCircleIcon} heading='Help & Support' />
       <HeaderDropdownButton className='dropdownBtn' Icon={MoonIcon} heading='Display & Accessibility' />
       <HeaderDropdownButton className='dropdownBtn' Icon={LogoutIcon} heading='Log Out' />
-    </>
+    </div>
   )
 }
 

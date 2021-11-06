@@ -18,28 +18,12 @@
   .toolTipCenter {
     @apply hidden md:block p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
   }
-  .toolTipRight,
+  /* .toolTipRight,
   .toolTipAccount,
   .toolTipNotifications,
-  .toolTipMessenger,
-  .toolTipMenu {
+  .toolTipMessenger, */
+  .toolTip {
     @apply hidden md:inline-block absolute top-8 p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
-  }
-
-  .toolTipAccount {
-    @apply right-[-0.4rem];
-  }
-
-  .toolTipNotifications {
-    @apply right-[-1.2rem];
-  }
-
-  .toolTipMessenger {
-    @apply right-[-0.8rem];
-  }
-
-  .toolTipMenu {
-    @apply right-[0rem];
   }
 
   .toolTipCenterRight {

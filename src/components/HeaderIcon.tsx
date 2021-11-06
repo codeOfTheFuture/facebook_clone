@@ -10,6 +10,7 @@ interface HeaderIconProps {
   active?: boolean;
   handleClick?: () => void;
   dropdownOpen?: boolean;
+  dropdownRef?: any;
 }
 
 const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
@@ -28,10 +29,10 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
     active,
     iconClassName,
     iconContainerClassName,
-    tooltipClassName,
     tooltipName,
     handleClick,
     dropdownOpen,
+    dropdownRef
   } = props;
 
   return (
@@ -39,16 +40,20 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
       className={`${iconContainerClassName} relative group`}
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}
-      onClick={handleClick}
       data-test='component-header-icon'
+      ref={dropdownRef}
     >
-      <Icon
-        className={`${iconClassName} ${(active || dropdownOpen) && "text-blue-500"
-          }`}
-      />
-      {iconHover && !dropdownOpen && (
-        <span className={`${tooltipClassName} mt-5 z-20`}>{tooltipName}</span>
-      )}
+      <div onClick={handleClick}
+        className='flex flex-col justify-center items-center'
+      >
+        <Icon
+          className={`${iconClassName} ${(active || dropdownOpen) && "text-blue-500"
+            }`}
+        />
+        {iconHover && !dropdownOpen && (
+          <span className='toolTip mt-5 z-20'>{tooltipName}</span>
+        )}
+      </div>
 
       {dropdownOpen && <HeaderDropdown />}
     </div>
