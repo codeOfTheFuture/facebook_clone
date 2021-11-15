@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import HeaderDropdown from "./HeaderDropdown";
 
 interface HeaderIconProps {
-  Icon: any;
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   iconClassName: string;
   iconContainerClassName?: string;
   tooltipClassName?: string;
@@ -10,7 +9,9 @@ interface HeaderIconProps {
   active?: boolean;
   handleClick?: () => void;
   dropdownOpen?: boolean;
-  dropdownRef?: any;
+  iconRef?: any;
+  Dropdown?: any;
+  backBtn?: boolean;
 }
 
 const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
@@ -32,7 +33,9 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
     tooltipName,
     handleClick,
     dropdownOpen,
-    dropdownRef
+    iconRef,
+    Dropdown,
+    backBtn
   } = props;
 
   return (
@@ -41,21 +44,22 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}
       data-test='component-header-icon'
-      ref={dropdownRef}
+      ref={iconRef}
     >
-      <div onClick={handleClick}
+      <div
+        onClick={handleClick}
         className='flex flex-col justify-center items-center'
       >
         <Icon
           className={`${iconClassName} ${(active || dropdownOpen) && "text-blue-500"
             }`}
         />
-        {iconHover && !dropdownOpen && (
+        {iconHover && !dropdownOpen && !backBtn && (
           <span className='toolTip mt-5 z-20'>{tooltipName}</span>
         )}
       </div>
 
-      {dropdownOpen && <HeaderDropdown />}
+      {dropdownOpen && <Dropdown />}
     </div>
   );
 };

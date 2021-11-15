@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import HeaderProfileBtn from "./HeaderProfileBtn";
 import {
   BellIcon,
   ChatIcon,
@@ -7,21 +8,20 @@ import {
   MenuIcon,
 } from "@heroicons/react/solid";
 import HeaderIcon from "./HeaderIcon";
+import HeaderDropdownAccount from "./HeaderDropdownAccount";
 import { useAuth } from "../context/AuthContext";
 import useClickOutside from "../hooks/useClickOutside";
 
 const HeaderRight: React.FC = () => {
   const { user } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<any>(null);
-
-
+  const iconRef = useRef<any>(null);
 
   const handleClick = () => {
     setDropdownOpen((prevState) => !prevState);
   };
 
-  useClickOutside(dropdownRef, () => {
+  useClickOutside(iconRef, () => {
     setDropdownOpen(false);
   });
 
@@ -38,19 +38,10 @@ const HeaderRight: React.FC = () => {
         tooltipName={"Home"}
       />
 
-      <div className='flex items-center sm:space-x-2 p-1 hover:bg-gray-200 rounded-full cursor-pointer'>
-        <img
-          src={user.photoURL}
-          alt=''
-          width={30}
-          height={30}
-          className='rounded-full'
-        />
-
-        <p className='whitespace-nowrap font-semibold pr-3'>
-          {user.displayName.split(" ")[0]}
-        </p>
-      </div>
+      <HeaderProfileBtn
+        photoURL={user.photoURL}
+        displayName={user.displayName}
+      />
 
       <HeaderIcon
         Icon={ViewGridIcon}
@@ -66,6 +57,7 @@ const HeaderRight: React.FC = () => {
         Icon={BellIcon}
         iconClassName={"headerIconRight"}
         tooltipName={"Notifications"}
+        handleClick={handleClick}
       />
       <HeaderIcon
         Icon={ChevronDownIcon}
@@ -73,7 +65,8 @@ const HeaderRight: React.FC = () => {
         tooltipName={"Account"}
         handleClick={handleClick}
         dropdownOpen={dropdownOpen}
-        dropdownRef={dropdownRef}
+        iconRef={iconRef}
+        Dropdown={HeaderDropdownAccount}
       />
     </div>
   );

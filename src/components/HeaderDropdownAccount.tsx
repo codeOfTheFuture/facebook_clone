@@ -1,12 +1,19 @@
+import { useState } from "react";
 import HeaderDropdownButton from "./HeaderDropdownButton";
-import { AnnotationIcon, CogIcon, QuestionMarkCircleIcon, MoonIcon, LogoutIcon } from '@heroicons/react/solid';
-import { ChevronRightIcon } from '@heroicons/react/outline';
+import {
+  AnnotationIcon,
+  CogIcon,
+  QuestionMarkCircleIcon,
+  MoonIcon,
+  LogoutIcon,
+} from "@heroicons/react/solid";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import DropdownDisplay from "./DropdownDisplay";
 
-
-const HeaderDropdownAccount = () => {
-
+const HeaderDropdownAccount: React.FC = () => {
+  const [displayOptionsOpen, setDisplayOptionsOpen] = useState(false);
   // Log out
   const { user, logOut } = useAuth();
   const history = useHistory();
@@ -20,20 +27,59 @@ const HeaderDropdownAccount = () => {
     }
   };
 
+  const displayOpen = () => {
+    setDisplayOptionsOpen((prevState) => !prevState);
+  };
 
   return (
-    <div>
-      <HeaderDropdownButton className='dropdownProfileBtn' img='https://graph.facebook.com/6372305086142776/picture' heading='Jeff Oliver' text='See your profile' />
-      <hr />
-      <HeaderDropdownButton className='dropdownFeedbackBtn' Icon={AnnotationIcon} heading='Give feedback' text='Help us improve the new Facebook' />
-      <hr />
-      <HeaderDropdownButton className='dropdownBtn' Icon={CogIcon}
-        SecondaryIcon={ChevronRightIcon} heading='Settings & Privacy' />
-      <HeaderDropdownButton className='dropdownBtn' Icon={QuestionMarkCircleIcon} SecondaryIcon={ChevronRightIcon} heading='Help & Support' />
-      <HeaderDropdownButton className='dropdownBtn' Icon={MoonIcon} SecondaryIcon={ChevronRightIcon} heading='Display & Accessibility' />
-      <HeaderDropdownButton className='dropdownBtn' Icon={LogoutIcon} heading='Log Out' clickHandler={handleLogOut} />
+    <div className='absolute inline-block top-10 mt-2 right-0 p-2 border border-gray-200 bg-white rounded-lg shadow-lg z-10 overflow-x-hidden'>
+      <div className='relative'>
+        <HeaderDropdownButton
+          className='dropdownProfileBtn'
+          img={user.photoURL}
+          heading={user.displayName}
+          text='See your profile'
+        />
+        <hr />
+        <HeaderDropdownButton
+          className='dropdownFeedbackBtn'
+          Icon={AnnotationIcon}
+          heading='Give feedback'
+          text='Help us improve the new Facebook'
+        />
+        <hr />
+        <HeaderDropdownButton
+          className='dropdownBtn'
+          Icon={CogIcon}
+          SecondaryIcon={ChevronRightIcon}
+          heading='Settings & Privacy'
+        />
+        <HeaderDropdownButton
+          className='dropdownBtn'
+          Icon={QuestionMarkCircleIcon}
+          SecondaryIcon={ChevronRightIcon}
+          heading='Help & Support'
+        />
+        <HeaderDropdownButton
+          className='dropdownBtn'
+          Icon={MoonIcon}
+          SecondaryIcon={ChevronRightIcon}
+          heading='Display & Accessibility'
+          clickHandler={displayOpen}
+        />
+        <HeaderDropdownButton
+          className='dropdownBtn'
+          Icon={LogoutIcon}
+          heading='Log Out'
+          clickHandler={handleLogOut}
+        />
+      </div>
+      <DropdownDisplay
+        displayOptionsOpen={displayOptionsOpen}
+        clickHandler={displayOpen}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default HeaderDropdownAccount;

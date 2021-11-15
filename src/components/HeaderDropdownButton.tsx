@@ -29,7 +29,6 @@ const HeaderDropdownButton: React.FC<HeaderDropdownButtonProps> = (props) => {
         </div>
       </div>
 
-
       {SecondaryIcon && (
         <div className='mr-2'>
           <SecondaryIcon width='20px' height='20px' />
