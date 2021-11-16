@@ -4,27 +4,27 @@
 
 @layer components {
   .headerIconRight {
-    @apply hidden relative xl:inline-block p-2 h-10 w-10 bg-gray-200 rounded-full text-gray-700 cursor-pointer hover:bg-gray-300;
+    @apply hidden relative xl:inline-block p-2 h-10 w-10 bg-gray-200 rounded-full text-gray-700 cursor-pointer hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-gray-200;
   }
 
   .headerIconBack {
-    @apply hidden relative xl:inline-block p-2 h-8 w-8 bg-white rounded-full text-gray-700 cursor-pointer hover:bg-gray-200;
+    @apply hidden relative xl:inline-block p-2 h-8 w-8 bg-white rounded-full text-gray-700 cursor-pointer hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200;
   }
 
   .headerIconCenter {
-    @apply h-5 text-gray-500 text-center group-hover:text-blue-500 sm:h-7 mx-auto mt-[0.3rem];
+    @apply h-5 text-gray-500 dark:text-gray-200 text-center group-hover:text-blue-500 sm:h-7 mx-auto mt-[0.3rem];
   }
 
   .headerIconContainer {
-    @apply cursor-pointer md:w-28 md:px-8 sm:h-10 md:hover:bg-gray-100 rounded-xl active:border-b-2 active:border-blue-500;
+    @apply cursor-pointer md:w-28 md:px-8 sm:h-10 md:hover:bg-gray-100 rounded-xl active:border-b-2 active:border-blue-500 md:dark:hover:bg-gray-600;
   }
 
   .toolTipCenter {
-    @apply hidden md:block p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
+    @apply hidden md:block p-1 rounded-md text-xs text-center text-white bg-black opacity-70 dark:bg-gray-200 dark:text-black;
   }
 
   .toolTip {
-    @apply hidden md:inline-block absolute top-8 p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
+    @apply hidden md:inline-block absolute top-8 p-1 rounded-md text-xs text-center text-white bg-black opacity-70 dark:bg-gray-200 dark:text-black;
   }
 
   .toolTipCenterRight {
@@ -32,18 +32,18 @@
   }
 
   .inputIcon {
-    @apply flex items-center space-x-3 hover:bg-gray-100 flex-grow justify-center p-2 rounded-xl cursor-pointer;
+    @apply flex items-center space-x-3 hover:bg-gray-100 flex-grow justify-center p-2 rounded-xl cursor-pointer dark:hover:bg-gray-600;
   }
 
   .dropdownProfileBtn {
-    @apply flex items-center justify-start w-80 rounded-lg h-16 p-2 mb-2 bg-white hover:bg-gray-200 cursor-pointer;
+    @apply flex items-center justify-start w-80 rounded-lg h-16 p-2 mb-2 bg-white hover:bg-gray-200 cursor-pointer dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
   }
   .dropdownFeedbackBtn {
-    @apply flex items-center justify-start w-80 rounded-lg h-16 p-1 my-2 bg-white hover:bg-gray-200 cursor-pointer;
+    @apply flex items-center justify-start w-80 rounded-lg h-16 p-1 my-2 bg-white hover:bg-gray-200 cursor-pointer dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
   }
 
   .dropdownBtn {
-    @apply flex items-center justify-between w-80 rounded-lg h-14 my-2 bg-white hover:bg-gray-200 cursor-pointer;
+    @apply flex items-center justify-between w-80 rounded-lg h-14 my-2 bg-white hover:bg-gray-200 cursor-pointer dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
   }
 
   .menuIconContainer {

@@ -9,11 +9,11 @@ const Widgets: React.FC = () => {
   return (
     <div className='hidden lg:flex flex-col w-60 p-3 mt-5'>
       <div className='flex justify-between items-center text-gray-500 mb-5'>
-        <h2 className='text-xl'>Contacts</h2>
+        <h2 className='text-xl dark:text-gray-200'>Contacts</h2>
         <div className='flex space-x-2'>
-          <VideoCameraIcon className='cursor-pointer' height={15} />
-          <SearchIcon className='cursor-pointer' height={15} />
-          <DotsHorizontalIcon className='cursor-pointer' height={15} />
+          <VideoCameraIcon className='cursor-pointer dark:text-gray-200' height={15} />
+          <SearchIcon className='cursor-pointer dark:text-gray-200' height={15} />
+          <DotsHorizontalIcon className='cursor-pointer dark:text-gray-200' height={15} />
         </div>
       </div>
 

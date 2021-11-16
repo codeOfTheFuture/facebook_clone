@@ -51,7 +51,7 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
         className='flex flex-col justify-center items-center'
       >
         <Icon
-          className={`${iconClassName} ${(active || dropdownOpen) && "text-blue-500"
+          className={`${iconClassName} ${(active || dropdownOpen) && "text-blue-500 dark:text-blue-500"
             }`}
         />
         {iconHover && !dropdownOpen && !backBtn && (

@@ -20,9 +20,9 @@ const Login: React.FC = () => {
   return user ? (
     <Redirect to='/' />
   ) : (
-    <div className='grid place-items-center mt-5' data-test='page-login'>
+    <div className='flex flex-col items-center h-screen' data-test='page-login'>
       <img
-        className='object-contain my-10'
+        className='object-contain my-8'
         src='https://links.papareact.com/t4i'
         alt='Facebook Logo'
         height={400}

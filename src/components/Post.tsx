@@ -20,7 +20,7 @@ const Post: React.FC<PostProps> = ({
 }) => {
   return (
     <div className='flex flex-col'>
-      <div className='p-5 bg-white mt-5 rounded-t-2xl shadow-sm'>
+      <div className='p-5 bg-white mt-5 rounded-t-2xl shadow-sm dark:bg-gray-700 dark:text-gray-200'>
         <div className='flex items-center space-x-2'>
           <img
             className='rounded-full'
@@ -39,7 +39,7 @@ const Post: React.FC<PostProps> = ({
       </div>
 
       {postImage && (
-        <div className='relative h-56 md:h-96 bg-white'>
+        <div className='relative h-56 md:h-96 bg-white dark:bg-gray-700'>
           <img
             className='object-cover object-center'
             src={postImage}
@@ -48,7 +48,7 @@ const Post: React.FC<PostProps> = ({
         </div>
       )}
 
-      <div className='flex justify-between items-center rounded-b-2xl bg-white shadow-md text-gray-400 border-t'>
+      <div className='flex justify-between items-center rounded-b-2xl bg-white shadow-md text-gray-400 border-t dark:bg-gray-700 dark:text-gray-200'>
         <div className='inputIcon rounded-none rounded-bl-2xl'>
           <ThumbUpIcon height={20} />
           <p className='text-xs sm:text-base'>Like</p>

@@ -32,7 +32,7 @@ const HeaderDropdownAccount: React.FC = () => {
   };
 
   return (
-    <div className='absolute inline-block top-10 mt-2 right-0 p-2 border border-gray-200 bg-white rounded-lg shadow-lg z-10 overflow-x-hidden'>
+    <div className='absolute inline-block top-10 mt-2 right-0 p-2 border border-gray-200 bg-white rounded-lg shadow-lg z-10 overflow-x-hidden dark:bg-gray-700 dark:border-gray-700'>
       <div className='relative'>
         <HeaderDropdownButton
           className='dropdownProfileBtn'
