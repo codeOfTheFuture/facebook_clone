@@ -1,29 +1,36 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
 
 interface RadioButtonProps {
   name: string;
   radioId: string;
-  darkModeOn: boolean;
-  toggleDarkMode: () => void;
 }
 
-const RadioButton: React.FC<RadioButtonProps> = (props) => {
+const RadioButton: React.FC<RadioButtonProps> = ({ name, radioId }) => {
+  const { darkMode, darkModeToggle } = useTheme();
+
+  const handleClick = () => {
+    return ((radioId === "off" && darkMode) ||
+      (radioId === "on" && !darkMode)) &&
+      darkModeToggle()
+  }
+
   return (
     <label
-      htmlFor={props.radioId}
+      htmlFor={radioId}
       className='inline-flex w-full justify-between items-center cursor-pointer p-2 hover:bg-gray-200 rounded-lg'
-      onClick={props.toggleDarkMode}
+      onClick={handleClick}
     >
-      <p className='text-md font-semibold'>{props.name}</p>
+      <p className='text-md font-semibold'>{name}</p>
       <div>
         <input
           type='radio'
           name='radioBtnInput'
-          id={props.radioId}
+          id={radioId}
           className='hidden peer'
           defaultChecked={
-            ((props.radioId === "off" && !props.darkModeOn) ||
-              (props.radioId === "on" && props.darkModeOn)) &&
+            ((radioId === "off" && !darkMode) ||
+              (radioId === "on" && darkMode)) &&
             true
           }
         />

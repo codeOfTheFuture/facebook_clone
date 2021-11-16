@@ -1,6 +1,4 @@
-import { DocumentTextIcon } from "@heroicons/react/outline";
 import { ArrowLeftIcon, MoonIcon } from "@heroicons/react/solid";
-import { useState } from "react";
 import HeaderIcon from "./HeaderIcon";
 import RadioButton from "./RadioButton";
 
@@ -10,15 +8,6 @@ interface DropdownDisplayProps {
 }
 
 const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
-  const [darkModeOn, setDarkModeOn] = useState<boolean>(false);
-
-  const toggleOn = () => {
-    setDarkModeOn(true);
-  };
-
-  const toggleOff = () => {
-    setDarkModeOn(false);
-  };
 
   return (
     <div
@@ -52,14 +41,11 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
             <RadioButton
               name='Off'
               radioId='off'
-              darkModeOn={darkModeOn}
-              toggleDarkMode={toggleOff}
+
             />
             <RadioButton
               name='On'
               radioId='on'
-              darkModeOn={darkModeOn}
-              toggleDarkMode={toggleOn}
             />
           </div>
         </div>
