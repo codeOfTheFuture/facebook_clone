@@ -22,10 +22,7 @@
   .toolTipCenter {
     @apply hidden md:block p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
   }
-  /* .toolTipRight,
-  .toolTipAccount,
-  .toolTipNotifications,
-  .toolTipMessenger, */
+
   .toolTip {
     @apply hidden md:inline-block absolute top-8 p-1 rounded-md text-xs text-center text-white bg-black opacity-70;
   }

@@ -1,6 +1,8 @@
 import { DocumentTextIcon } from "@heroicons/react/outline";
 import { ArrowLeftIcon, MoonIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 import HeaderIcon from "./HeaderIcon";
+import RadioButton from "./RadioButton";
 
 interface DropdownDisplayProps {
   displayOptionsOpen: boolean;
@@ -8,9 +10,19 @@ interface DropdownDisplayProps {
 }
 
 const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
+  const [darkModeOn, setDarkModeOn] = useState<boolean>(false);
+
+  const toggleOn = () => {
+    setDarkModeOn(true);
+  };
+
+  const toggleOff = () => {
+    setDarkModeOn(false);
+  };
+
   return (
     <div
-      className={`absolute flex flex-col items-center w-full h-full p-4 bg-white top-0 -right-96 z-20 ${props.displayOptionsOpen && 'left-0'
+      className={`absolute flex flex-col items-center w-full h-full p-4 bg-white top-0 -right-96 z-20 ${props.displayOptionsOpen && "left-0"
         }`}
     >
       <div className='flex w-full items-center'>
@@ -24,33 +36,31 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
           Display & Accessibility
         </h1>
       </div>
-      <div>
-        <div className='flex flex-col justify-center items-center mt-4'>
-          <div className='flex'>
-
-            <MoonIcon className="p-2 h-12 w-12 bg-gray-200 rounded-full" />
-
-            <div>
-              <h2 className="font-bold">Dark Mode</h2>
-              <p className="text-sm">Adjust the appearance of Facebook to reduce glare and give your eyes a break</p>
-            </div>
-          </div>
-          <div>
-            <input type="radio" name="darkModeOff" id="darkModeOff" />
-            <input type="radio" name="darkModeOn" id="darkModeOn" />
-          </div>
+      <div className='flex'>
+        <div className='flex flex-col justify-start items-center p-2 mt-2'>
+          <MoonIcon className='rounded-full w-10 h-10 p-2 bg-gray-200 text-center' />
         </div>
-        <div>
-          <div className='flex'>
-            <DocumentTextIcon className="w-8 h-8" />
-            <div>
-              <h2 className="font-bold">Compact Mode</h2>
-              <p className="text-sm">Make your font size smaller so more content can fit on the screen</p>
-            </div>
+        <div className='flex flex-col'>
+          <div className='flex flex-col p-2'>
+            <h2 className='font-semibold'>Dark Mode</h2>
+            <p className='text-xs text-gray-600'>
+              Adjust the appearance of Facebook to reduce glare and give your
+              eyes a break.
+            </p>
           </div>
-          <div>
-            <input type="radio" name="compactModeOff" id="compactModeOff" />
-            <input type="radio" name="compactModeOn" id="compactModeOn" />
+          <div className='flex flex-col'>
+            <RadioButton
+              name='Off'
+              radioId='off'
+              darkModeOn={darkModeOn}
+              toggleDarkMode={toggleOff}
+            />
+            <RadioButton
+              name='On'
+              radioId='on'
+              darkModeOn={darkModeOn}
+              toggleDarkMode={toggleOn}
+            />
           </div>
         </div>
       </div>
