@@ -9,7 +9,7 @@ const Contact: React.FC<ContactProps> = ({ src, name }) => {
   return (
     <div className='flex items-center space-x-3 mb-2 relative hover:bg-gray-200 cursor-pointer p-2 rounded-xl dark:text-gray-200 dark:hover:bg-gray-600'>
       <img
-        className='rounded-full object-cover'
+        className='rounded-full object-cover w-12 h-12'
         src={src}
         alt={`Contact-${name}`}
         style={{ width: "50px", height: "50px" }}

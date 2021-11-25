@@ -83,7 +83,7 @@ const InputBox: React.FC = () => {
       reader.readAsDataURL(e.target.files![0]);
     }
 
-    reader.onload = (readerEvent) => {
+    reader.onload = (readerEvent: ProgressEvent<FileReader>) => {
       setImageToPost(readerEvent.target!.result as string);
     };
   };
