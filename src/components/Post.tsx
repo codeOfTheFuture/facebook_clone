@@ -1,6 +1,14 @@
-import { DocumentData } from "firebase/firestore";
-import React, { useState } from "react";
+import {
+  collection,
+  DocumentData,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase.setup";
 import CommentInput from "./CommentInput";
+import Comments from "./Comments";
 import PostButtons from "./PostButtons";
 import PostHeader from "./PostHeader";
 import PostImage from "./PostImage";
@@ -11,13 +19,27 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ post }) => {
   const { id } = post,
-    { name, image, postImage, timestamp, message } = post.data();
-  const [showComments, setShowComments] = useState(false);
+    { name, image, postImage, timestamp, message } = post.data(),
+    [showComments, setShowComments] = useState(false),
+    [comments, setComments] = useState<DocumentData[]>([]);
 
+  useEffect(
+    () =>
+      onSnapshot(
+        query(
+          collection(db, "posts", id, "comments"),
+          orderBy("timestamp", "desc")
+        ),
+        (snapshot: DocumentData) => setComments(snapshot.docs)
+      ),
+    [id]
+  );
 
   const toggleComments = () => {
     setShowComments((prevState) => !prevState);
   };
+
+  console.log(post.data());
 
   return (
     <div className='flex flex-col'>
@@ -34,15 +56,16 @@ const Post: React.FC<PostProps> = ({ post }) => {
       {postImage && <PostImage postImage={postImage} />}
 
       <PostButtons
-        showComments={showComments}
+        showComments={(showComments || comments.length > 0)}
         toggleComments={toggleComments}
       />
 
-      {showComments && <hr />}
-      {showComments && (
-        <CommentInput
-          postId={id}
-        />
+      {(showComments || comments.length > 0) && (
+        <div className='flex flex-col'>
+          <hr />
+          <Comments comments={comments} />
+          <CommentInput postId={id} />
+        </div>
       )}
     </div>
   );

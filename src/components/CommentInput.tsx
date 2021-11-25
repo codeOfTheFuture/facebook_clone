@@ -80,23 +80,23 @@ const CommentInput: React.FC<CommentInputProps> = (props) => {
       console.error(error);
     }
 
-    setComment('');
+    setComment("");
     removeImage();
   };
 
   return (
-    <div className='flex items-center w-full p-4 rounded-b-2xl bg-white shadow-md'>
+    <div className='flex items-center w-full p-4 rounded-b-2xl bg-white shadow-md dark:bg-gray-700'>
       <img
         src={user.photoURL}
         className='w-7 h-7 rounded-full mr-2'
         alt='User profile'
       />
       <form
-        className='flex items-center w-full rounded-2xl p-1 bg-gray-100'
+        className='flex items-center w-full rounded-2xl p-1 bg-gray-100 dark:bg-gray-500'
         onSubmit={sendComment}
       >
         <input
-          className='inline-flex flex-shrink items-center mx-2 w-full outline-none bg-transparent placeholder-gray-500'
+          className='inline-flex flex-shrink items-center mx-2 w-full outline-none bg-transparent placeholder-gray-500 dark:placeholder-gray-200'
           type='text'
           placeholder='Write a comment...'
           value={comment}
@@ -105,7 +105,7 @@ const CommentInput: React.FC<CommentInputProps> = (props) => {
           }
         />
         <CameraIcon
-          className='h-6 mr-2 text-gray-400 rounded-full hover:bg-gray-300 cursor-pointer'
+          className='h-6 mr-2 text-gray-400 rounded-full hover:bg-gray-300 cursor-pointer dark:text-gray-200'
           onClick={() => filePickerRef.current?.click()}
         />
         <input

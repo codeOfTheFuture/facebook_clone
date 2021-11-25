@@ -6,8 +6,8 @@ interface PostImageProps {
 
 const PostImage: React.FC<PostImageProps> = ({ postImage }) => {
   return (
-    <div className='flex justify-center bg-white dark:bg-gray-700'>
-      <img className='object-cover mb-4 object-center' src={postImage} alt='post' />
+    <div className='flex bg-white dark:bg-gray-700'>
+      <img className='object-cover mb-4 object-center' width={'100%'} src={postImage} alt='post' />
     </div>
   );
 };
