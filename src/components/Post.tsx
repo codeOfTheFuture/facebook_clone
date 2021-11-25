@@ -10,12 +10,14 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ post }) => {
-  const { name, image, postImage, timestamp, message } = post.data();
+  const { id } = post,
+    { name, image, postImage, timestamp, message } = post.data();
   const [showComments, setShowComments] = useState(false);
 
+
   const toggleComments = () => {
-    setShowComments(prevState => !prevState);
-  }
+    setShowComments((prevState) => !prevState);
+  };
 
   return (
     <div className='flex flex-col'>
@@ -31,10 +33,17 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
       {postImage && <PostImage postImage={postImage} />}
 
-      <PostButtons showComments={showComments} toggleComments={toggleComments} />
+      <PostButtons
+        showComments={showComments}
+        toggleComments={toggleComments}
+      />
 
       {showComments && <hr />}
-      {showComments && <CommentInput />}
+      {showComments && (
+        <CommentInput
+          postId={id}
+        />
+      )}
     </div>
   );
 };
