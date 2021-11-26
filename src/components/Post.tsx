@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase.setup";
 import CommentInput from "./CommentInput";
 import Comments from "./Comments";
+import LikeCommentCount from "./LikeCommentCount";
 import PostButtons from "./PostButtons";
 import PostHeader from "./PostHeader";
 import PostImage from "./PostImage";
@@ -30,7 +31,10 @@ const Post: React.FC<PostProps> = ({ post }) => {
           collection(db, "posts", id, "comments"),
           orderBy("timestamp", "desc")
         ),
-        (snapshot: DocumentData) => setComments(snapshot.docs)
+        (snapshot: DocumentData) => {
+          setComments(snapshot.docs);
+          setShowComments(true);
+        }
       ),
     [id]
   );
@@ -38,8 +42,6 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const toggleComments = () => {
     setShowComments((prevState) => !prevState);
   };
-
-  console.log(post.data());
 
   return (
     <div className='flex flex-col'>
@@ -55,12 +57,19 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
       {postImage && <PostImage postImage={postImage} />}
 
+      {comments.length > 0 && (
+        <LikeCommentCount
+          commentCount={comments.length}
+          toggleComments={toggleComments}
+        />
+      )}
+
       <PostButtons
-        showComments={(showComments || comments.length > 0)}
+        showComments={showComments}
         toggleComments={toggleComments}
       />
 
-      {(showComments || comments.length > 0) && (
+      {showComments && (
         <div className='flex flex-col'>
           <hr />
           <Comments comments={comments} />
