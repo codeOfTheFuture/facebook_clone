@@ -13,21 +13,21 @@ const stories = [
   },
   {
     id: 2,
-    name: "Jeff Bezoz",
-    src: "https://links.papareact.com/k2j",
-    profile: "https://links.papareact.com/f0p",
+    name: "Keanu Reeves",
+    src: "images/stories/keanu1.png",
+    profile: "images/stories/keanu2.png",
   },
   {
     id: 3,
-    name: "Mark Zuckerberg",
-    src: "https://links.papareact.com/xql",
-    profile: "https://links.papareact.com/snf",
+    name: "Joe Rogan",
+    src: "images/stories/rogan1.png",
+    profile: "images/stories/rogan2.png",
   },
   {
     id: 4,
-    name: "Bill Gates",
-    src: "https://links.papareact.com/4u4",
-    profile: "https://links.papareact.com/zvy",
+    name: "Derek Jeter",
+    src: "images/stories/jeter1.png",
+    profile: "images/stories/jeter2.png",
   },
 ];
 

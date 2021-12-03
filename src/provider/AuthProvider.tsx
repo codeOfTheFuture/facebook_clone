@@ -5,28 +5,47 @@ import {
   signInWithPopup,
   FacebookAuthProvider,
   signOut,
+  User,
 } from "firebase/auth";
 import { auth } from "../firebase.setup";
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User | null>(null),
+    [photoDataURL, setPhotoDataURL] = useState<string>(""),
+    [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
-      setUser(firebaseUser);
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
+  useEffect(
+    () =>
+      auth.onAuthStateChanged((firebaseUser) => {
+        setUser(firebaseUser);
+        setLoading(false);
+      }),
+    []
+  );
 
   // Facebook sign in
-  const signInWithFacebook = () => {
+  const signInWithFacebook = async () => {
     const provider = new FacebookAuthProvider(),
       auth = getAuth();
 
-    return signInWithPopup(auth, provider);
+    try {
+      const result = await signInWithPopup(auth, provider),
+        credential = FacebookAuthProvider.credentialFromResult(result),
+        accessToken = credential?.accessToken,
+        endpoint = `https://graph.facebook.com/me?fields=picture.type(large)&access_token=${accessToken}`,
+        data = await fetch(endpoint),
+        response = await data.json(),
+        photoURL: string = response.picture.data.url,
+        blob = await fetch(photoURL).then((r) => r.blob()),
+        dataURL: string = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.readAsDataURL(blob);
+        });
+      setPhotoDataURL(dataURL);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Logout
@@ -38,6 +57,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const value = {
     user,
+    photoDataURL,
     signInWithFacebook,
     logOut,
   };

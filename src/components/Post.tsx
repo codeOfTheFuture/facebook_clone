@@ -33,10 +33,10 @@ const Post: React.FC<PostProps> = ({ post }) => {
         ),
         (snapshot: DocumentData) => {
           setComments(snapshot.docs);
-          setShowComments(true);
+          comments.length > 0 && setShowComments(true);
         }
       ),
-    [id]
+    [id, comments.length]
   );
 
   const toggleComments = () => {

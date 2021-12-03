@@ -9,11 +9,9 @@ import {
 } from "@heroicons/react/solid";
 import HeaderIcon from "./HeaderIcon";
 import HeaderDropdownAccount from "./HeaderDropdownAccount";
-import { useAuth } from "../context/AuthContext";
 import useClickOutside from "../hooks/useClickOutside";
 
 const HeaderRight: React.FC = () => {
-  const { user } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const iconRef = useRef<any>(null);
 
@@ -38,10 +36,7 @@ const HeaderRight: React.FC = () => {
         tooltipName={"Home"}
       />
 
-      <HeaderProfileBtn
-        photoURL={user.photoURL}
-        displayName={user.displayName}
-      />
+      <HeaderProfileBtn />
 
       <HeaderIcon
         Icon={ViewGridIcon}

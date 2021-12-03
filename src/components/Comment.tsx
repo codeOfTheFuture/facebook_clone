@@ -8,6 +8,7 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({ commentData }) => {
   const { comment, timestamp, image, name, commentImage } = commentData.data();
+
   return (
     <div className='flex mt-4'>
       <div className='flex items-center justify-center w-10 h-full'>

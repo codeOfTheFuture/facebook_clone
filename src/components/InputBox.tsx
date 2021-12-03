@@ -1,4 +1,10 @@
-import React, { FormEvent, ChangeEvent, useRef, useState } from "react";
+import React, {
+  FormEvent,
+  ChangeEvent,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 import { useAuth } from "../context/AuthContext";
 import {
   collection,
@@ -6,6 +12,7 @@ import {
   addDoc,
   setDoc,
   serverTimestamp,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "../firebase.setup";
 import {
@@ -22,7 +29,18 @@ const InputBox: React.FC = () => {
     storage = getStorage(),
     inputRef = useRef<HTMLInputElement>(null),
     filePickerRef = useRef<HTMLInputElement>(null),
-    [imageToPost, setImageToPost] = useState<string | null>(null);
+    [imageToPost, setImageToPost] = useState<string | null>(null),
+    [photoURL, setPhotoURL] = useState<string>("");
+
+  useEffect(() => {
+    const getUser = async () => {
+      const docRef = doc(db, "users", user.uid),
+        docSnap = await getDoc(docRef);
+
+      docSnap.exists() && setPhotoURL(docSnap.data().photoURL);
+    };
+    getUser();
+  }, [user.uid]);
 
   // Set image state back to null
   const removeImage = () => {
@@ -41,7 +59,7 @@ const InputBox: React.FC = () => {
         message: inputRef.current!.value,
         name: user.displayName,
         email: user.email,
-        image: user.photoURL,
+        image: photoURL,
         timestamp: serverTimestamp(),
       });
 
@@ -92,13 +110,15 @@ const InputBox: React.FC = () => {
     <form onSubmit={sendPost}>
       <div className='bg-white p-2 rounded-2xl shadow-md text-gray-500 font-medium mt-6 dark:bg-gray-700'>
         <div className='flex space-x-4 p-4 items-center'>
-          <img
-            className='rounded-full'
-            src={user.photoURL}
-            alt='profile'
-            width={40}
-            height={40}
-          />
+          {photoURL && (
+            <img
+              className='rounded-full'
+              src={photoURL}
+              alt='profile'
+              width={40}
+              height={40}
+            />
+          )}
           <div className='flex flex-1'>
             <input
               className='rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none dark:bg-gray-600 dark:placeholder-gray-200 dark:text-gray-200'
@@ -127,14 +147,18 @@ const InputBox: React.FC = () => {
         <div className='flex justify-evenly p-3 border-t'>
           <div className='inputIcon'>
             <VideoCameraIcon className='h-7 text-red-500' />
-            <p className='text-xs sm:text-sm xl:text-base dark:text-gray-200'>Live Video</p>
+            <p className='text-xs sm:text-sm xl:text-base dark:text-gray-200'>
+              Live Video
+            </p>
           </div>
           <div
             className='inputIcon'
             onClick={() => filePickerRef.current?.click()}
           >
             <CameraIcon className='h-7 text-green-400' />
-            <p className='text-xs sm:text-sm xl:text-base dark:text-gray-200'>Photo/Video</p>
+            <p className='text-xs sm:text-sm xl:text-base dark:text-gray-200'>
+              Photo/Video
+            </p>
             <input
               onChange={addImageToPost}
               ref={filePickerRef}
@@ -144,7 +168,9 @@ const InputBox: React.FC = () => {
           </div>
           <div className='inputIcon hidden sm:flex'>
             <EmojiHappyIcon className='h-7 text-yellow-300' />
-            <p className='text-xs sm:text-sm xl:text-base dark:text-gray-200'>Feeling/Activity</p>
+            <p className='text-xs sm:text-sm xl:text-base dark:text-gray-200'>
+              Feeling/Activity
+            </p>
           </div>
         </div>
       </div>
