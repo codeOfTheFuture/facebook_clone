@@ -1,21 +1,9 @@
-import { doc, getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { db } from "../firebase.setup";
+import { useUserProfile } from "../context/UserProfileContext";
 
 const HeaderProfileBtn: React.FC = () => {
   const { user } = useAuth();
-  const [photoURL, setPhotoURL] = useState<string>("");
-
-  useEffect(() => {
-    const getUser = async () => {
-      const docRef = doc(db, "users", user.uid),
-        docSnap = await getDoc(docRef);
-
-      docSnap.exists() && setPhotoURL(docSnap.data().photoURL);
-    };
-    getUser();
-  }, [user.uid]);
+  const { photoURL } = useUserProfile();
 
   return (
     <div className='flex items-center sm:space-x-2 p-1 hover:bg-gray-200 rounded-full cursor-pointer dark:hover:bg-gray-600'>

@@ -17,7 +17,7 @@ const HeaderDropdownButton: React.FC<HeaderDropdownButtonProps> = (props) => {
       <div className='flex items-center'>
         <div className='ml-2'>
           {props.img && (
-            <img src={props.img} alt='' className='w-15 h-15 rounded-full' />
+            <img src={props.img} alt='' className='rounded-full' width={50} />
           )}
           {props.Icon && (
             <Icon className='h-10 w-10 p-2 rounded-full bg-gray-100 dark:bg-gray-500' />

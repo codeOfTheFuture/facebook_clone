@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import { createContext, useContext } from "react";
 
 interface Theme {
   darkMode: boolean;
   darkModeToggle: () => void;
 }
 
-export const ThemeContext = React.createContext<Theme>({
+export const ThemeContext = createContext<Theme>({
   darkMode: false,
   darkModeToggle: () => {},
 });

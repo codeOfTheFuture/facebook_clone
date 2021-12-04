@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuth } from "../context/AuthContext";
+import { useUserProfile } from "../context/UserProfileContext";
 import SidebarRow from "./SidebarRow";
 import {
   ChevronDownIcon,
@@ -12,22 +13,10 @@ import {
   DesktopComputerIcon,
   UsersIcon,
 } from "@heroicons/react/solid";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase.setup";
 
 const Sidebar: React.FC = () => {
   const { user } = useAuth();
-  const [photoURL, setPhotoURL] = useState<string>("");
-
-  useEffect(() => {
-    const getUser = async () => {
-      const docRef = doc(db, "users", user.uid),
-        docSnap = await getDoc(docRef);
-
-      docSnap.exists() && setPhotoURL(docSnap.data().photoURL);
-    };
-    getUser();
-  }, [user.uid]);
+  const { photoURL } = useUserProfile();
 
   return (
     <div className='p-2 mt-5 max-w-[600px] xl:min-w-[300px]'>

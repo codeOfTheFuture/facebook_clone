@@ -1,18 +1,12 @@
-import React, {
-  FormEvent,
-  ChangeEvent,
-  useRef,
-  useState,
-  useEffect,
-} from "react";
+import React, { FormEvent, ChangeEvent, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useUserProfile } from "../context/UserProfileContext";
 import {
   collection,
   doc,
   addDoc,
   setDoc,
   serverTimestamp,
-  getDoc,
 } from "firebase/firestore";
 import { db } from "../firebase.setup";
 import {
@@ -26,21 +20,11 @@ import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
 
 const InputBox: React.FC = () => {
   const { user } = useAuth(),
+    { photoURL } = useUserProfile(),
     storage = getStorage(),
     inputRef = useRef<HTMLInputElement>(null),
     filePickerRef = useRef<HTMLInputElement>(null),
-    [imageToPost, setImageToPost] = useState<string | null>(null),
-    [photoURL, setPhotoURL] = useState<string>("");
-
-  useEffect(() => {
-    const getUser = async () => {
-      const docRef = doc(db, "users", user.uid),
-        docSnap = await getDoc(docRef);
-
-      docSnap.exists() && setPhotoURL(docSnap.data().photoURL);
-    };
-    getUser();
-  }, [user.uid]);
+    [imageToPost, setImageToPost] = useState<string | null>(null);
 
   // Set image state back to null
   const removeImage = () => {

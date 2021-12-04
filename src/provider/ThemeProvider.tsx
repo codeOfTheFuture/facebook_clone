@@ -5,7 +5,7 @@ export const ThemeProvider: React.FC = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
 
   const darkModeToggle = () => {
-    setDarkMode(prevState => !prevState)
+    setDarkMode((prevState) => !prevState);
   };
 
   const value = {
