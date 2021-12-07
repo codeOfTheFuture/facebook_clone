@@ -41,12 +41,11 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
           <div className='flex flex-col'>
             <RadioButton
               name='Off'
-              radioId='off'
-
+              radioId='OFF'
             />
             <RadioButton
               name='On'
-              radioId='on'
+              radioId='ON'
             />
           </div>
         </div>

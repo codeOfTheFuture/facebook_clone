@@ -1,6 +1,5 @@
 import React, { FormEvent, ChangeEvent, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useUserProfile } from "../context/UserProfileContext";
 import {
   collection,
   doc,
@@ -19,8 +18,7 @@ import { EmojiHappyIcon } from "@heroicons/react/outline";
 import { CameraIcon, VideoCameraIcon } from "@heroicons/react/solid";
 
 const InputBox: React.FC = () => {
-  const { user } = useAuth(),
-    { photoURL } = useUserProfile(),
+  const { user, photoURL } = useAuth(),
     storage = getStorage(),
     inputRef = useRef<HTMLInputElement>(null),
     filePickerRef = useRef<HTMLInputElement>(null),
@@ -41,8 +39,8 @@ const InputBox: React.FC = () => {
       // Adds a new doc to firestore db collection `posts` as a promise
       const newDoc = await addDoc(collection(db, "posts"), {
         message: inputRef.current!.value,
-        name: user.displayName,
-        email: user.email,
+        name: user?.displayName,
+        email: user?.email,
         image: photoURL,
         timestamp: serverTimestamp(),
       });
@@ -108,7 +106,7 @@ const InputBox: React.FC = () => {
               className='rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none dark:bg-gray-600 dark:placeholder-gray-200 dark:text-gray-200'
               type='text'
               ref={inputRef}
-              placeholder={`What's on your mind, ${user.displayName.split(" ")[0]
+              placeholder={`What's on your mind, ${user?.displayName?.split(" ")[0]
                 }?`}
             />
           </div>

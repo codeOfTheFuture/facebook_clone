@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { checkFirebaseUser } from "../helpers";
 import {
   getAuth,
   signInWithPopup,
@@ -7,12 +8,13 @@ import {
   signOut,
   User,
 } from "firebase/auth";
-import { auth } from "../firebase.setup";
+import { auth, db } from "../firebase.setup";
+import { doc, getDoc } from "firebase/firestore";
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null),
-    [photoDataURL, setPhotoDataURL] = useState<string>(""),
-    [loading, setLoading] = useState<boolean>(true);
+    [loading, setLoading] = useState<boolean>(true),
+    [photoURL, setPhotoURL] = useState<string>("");
 
   useEffect(
     () =>
@@ -23,10 +25,23 @@ export const AuthProvider: React.FC = ({ children }) => {
     []
   );
 
+  useEffect(() => {
+    const getProfile = async () => {
+      const docRef = doc(db, "users", user?.uid!),
+        docSnap = await getDoc(docRef);
+      if (docSnap.exists()) setPhotoURL(docSnap.data().photoURL);
+    };
+    user && getProfile();
+  }, [user]);
+
   // Facebook sign in
-  const signInWithFacebook = async () => {
+  const signInWithFacebook = async (): Promise<void> => {
     const provider = new FacebookAuthProvider(),
-      auth = getAuth();
+      auth = getAuth(),
+      userProfile = {
+        uid: "",
+        photoURL: "",
+      };
 
     try {
       const result = await signInWithPopup(auth, provider),
@@ -34,7 +49,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         accessToken = credential?.accessToken,
         endpoint = `https://graph.facebook.com/me?fields=picture.type(large)&access_token=${accessToken}`,
         data = await fetch(endpoint),
-        response = await data.json(),
+        response: { picture: { data: { url: string } } } = await data.json(),
         photoURL: string = response.picture.data.url,
         blob = await fetch(photoURL).then((r) => r.blob()),
         dataURL: string = await new Promise((resolve) => {
@@ -42,7 +57,19 @@ export const AuthProvider: React.FC = ({ children }) => {
           reader.onload = () => resolve(reader.result as string);
           reader.readAsDataURL(blob);
         });
-      setPhotoDataURL(dataURL);
+
+      userProfile.uid = result.user.uid;
+      userProfile.photoURL = dataURL;
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const userDoc = await checkFirebaseUser({
+        uid: userProfile.uid,
+        photoDataURL: userProfile.photoURL,
+      });
+      userDoc && setPhotoURL(userDoc.photoURL);
     } catch (error) {
       console.error(error);
     }
@@ -57,10 +84,12 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const value = {
     user,
-    photoDataURL,
+    photoURL,
     signInWithFacebook,
     logOut,
   };
+
+  // console.log(photoURL);
 
   return (
     <AuthContext.Provider value={value}>

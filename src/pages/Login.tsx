@@ -4,7 +4,7 @@ import { useHistory, Redirect } from "react-router-dom";
 
 const Login: React.FC = () => {
   const { signInWithFacebook, user } = useAuth();
-  const history = useHistory();
+  const history = useHistory<History>();
 
   // Handle Sign In
   const handleSignIn = async (e: FormEvent) => {

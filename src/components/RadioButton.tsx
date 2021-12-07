@@ -1,5 +1,6 @@
 import React from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
+import { useUserProfile } from "../context/UserProfileContext";
 
 interface RadioButtonProps {
   name: string;
@@ -7,13 +8,13 @@ interface RadioButtonProps {
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({ name, radioId }) => {
-  const { darkMode, darkModeToggle } = useTheme();
+  const { user } = useAuth(),
+    { darkModeEnabled, darkModeToggle } = useUserProfile();
 
-  const handleClick = () => {
-    return ((radioId === "off" && darkMode) ||
-      (radioId === "on" && !darkMode)) &&
-      darkModeToggle()
-  }
+  const handleClick = () =>
+    radioId === "ON"
+      ? user && darkModeToggle(user.uid, true)
+      : user && darkModeToggle(user.uid, false);
 
   return (
     <label
@@ -29,8 +30,8 @@ const RadioButton: React.FC<RadioButtonProps> = ({ name, radioId }) => {
           id={radioId}
           className='hidden peer'
           defaultChecked={
-            ((radioId === "off" && !darkMode) ||
-              (radioId === "on" && darkMode)) &&
+            ((radioId === "OFF" && !darkModeEnabled) ||
+              (radioId === "ON" && darkModeEnabled)) &&
             true
           }
         />

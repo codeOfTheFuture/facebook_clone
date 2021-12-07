@@ -1,26 +1,36 @@
-import { doc, getDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
-import { UserProfileContext } from '../context/UserProfileContext';
-import { db } from '../firebase.setup';
+import React, { useReducer } from "react";
+import { UserProfileContext } from "../context/UserProfileContext";
+import { initialState } from "../context/UserProfileContext";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase.setup";
+import UserProfileReducer from "../reducers/UserProfileReducer";
 
 export const UserProfileProvider: React.FC = ({ children }) => {
-  const [photoURL, setPhotoURL] = useState<string>('');
+  const [state, dispatch] = useReducer(UserProfileReducer, initialState),
+    ACTIONS = { DARKMODETOGGLE: "DARKMODETOGGLE" };
 
-  const getUser = async (uid: string) => {
+  const darkModeToggle = async (uid: string, darkModeEnabled: boolean) => {
+    const userProfileRef = doc(db, "users", uid);
+
+    await updateDoc(userProfileRef, {
+      darkModeEnabled: darkModeEnabled,
+    });
+
     const docRef = doc(db, "users", uid),
       docSnap = await getDoc(docRef);
 
-    docSnap.exists() && setPhotoURL(docSnap.data().photoURL);
+    docSnap.exists() &&
+      dispatch({ type: ACTIONS.DARKMODETOGGLE, payload: docSnap.data() });
   };
 
   const value = {
-    photoURL: photoURL,
-    getUser: getUser
-  }
+    darkModeEnabled: state.darkModeEnabled,
+    darkModeToggle,
+  };
 
   return (
     <UserProfileContext.Provider value={value}>
       {children}
     </UserProfileContext.Provider>
-  )
-}
+  );
+};

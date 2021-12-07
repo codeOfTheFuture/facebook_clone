@@ -16,7 +16,7 @@ interface CommentInputProps {
 }
 
 const CommentInput: React.FC<CommentInputProps> = (props) => {
-  const { user } = useAuth(),
+  const { user, photoURL } = useAuth(),
     { postId } = props,
     filePickerRef = useRef<HTMLInputElement>(null),
     [imageToComment, setImageToComment] = useState<string | null>(null),
@@ -44,9 +44,9 @@ const CommentInput: React.FC<CommentInputProps> = (props) => {
     try {
       const newDoc = await addDoc(collection(db, "posts", postId, "comments"), {
         comment: comment,
-        name: user.displayName,
-        email: user.email,
-        image: user.photoURL,
+        name: user?.displayName,
+        email: user?.email,
+        image: user?.photoURL,
         timestamp: serverTimestamp(),
       });
 
@@ -87,7 +87,7 @@ const CommentInput: React.FC<CommentInputProps> = (props) => {
   return (
     <div className='flex items-center w-full p-4 rounded-b-2xl bg-white shadow-md dark:bg-gray-700'>
       <img
-        src={user.photoURL}
+        src={photoURL}
         className='w-7 h-7 rounded-full mr-2'
         alt='User profile'
       />

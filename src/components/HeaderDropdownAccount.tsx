@@ -9,15 +9,13 @@ import {
 } from "@heroicons/react/solid";
 import { ChevronRightIcon } from "@heroicons/react/outline";
 import { useAuth } from "../context/AuthContext";
-import { useUserProfile } from "../context/UserProfileContext";
 import { useHistory } from "react-router-dom";
 import DropdownDisplay from "./DropdownDisplay";
 
 const HeaderDropdownAccount: React.FC = () => {
-  const { photoURL } = useUserProfile();
+  const { user, photoURL, logOut } = useAuth();
   const [displayOptionsOpen, setDisplayOptionsOpen] = useState(false);
   // Log out
-  const { user, logOut } = useAuth();
   const history = useHistory();
 
   const handleLogOut = async () => {
@@ -36,12 +34,13 @@ const HeaderDropdownAccount: React.FC = () => {
   return (
     <div className='absolute inline-block top-10 mt-2 right-0 p-2 border border-gray-200 bg-white rounded-lg shadow-lg z-10 overflow-x-hidden dark:bg-gray-700 dark:border-gray-700'>
       <div className='relative'>
-        <HeaderDropdownButton
+        {user?.displayName && (<HeaderDropdownButton
           className='dropdownProfileBtn'
           img={photoURL}
-          heading={user.displayName}
+          heading={user?.displayName}
           text='See your profile'
         />
+        )}
         <hr />
         <HeaderDropdownButton
           className='dropdownFeedbackBtn'

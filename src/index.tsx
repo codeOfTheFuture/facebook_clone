@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { AuthProvider } from "./provider/AuthProvider";
-import { ThemeProvider } from "./provider/ThemeProvider";
 import { UserProfileProvider } from "./provider/UserProfileProvider";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -12,9 +11,7 @@ ReactDOM.render(
     <Router>
       <AuthProvider>
         <UserProfileProvider>
-          <ThemeProvider>
-            <App />
-          </ThemeProvider>
+          <App />
         </UserProfileProvider>
       </AuthProvider>
     </Router>
