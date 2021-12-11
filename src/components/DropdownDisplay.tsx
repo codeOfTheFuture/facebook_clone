@@ -8,7 +8,6 @@ interface DropdownDisplayProps {
 }
 
 const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
-
   return (
     <div
       className={`absolute flex flex-col items-center w-full h-full p-4 bg-white top-0 -right-96 z-20 ${props.displayOptionsOpen && "left-0"
@@ -27,8 +26,10 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
       </div>
       <div className='flex'>
         <div className='flex flex-col justify-start items-center p-2 mt-2'>
-          <MoonIcon className='rounded-full w-10 h-10 p-2 bg-gray-200 text-center dark:bg-gray-600
-          dark:text-gray-200' />
+          <MoonIcon
+            className='rounded-full w-10 h-10 p-2 bg-gray-200 text-center dark:bg-gray-600
+          dark:text-gray-200'
+          />
         </div>
         <div className='flex flex-col'>
           <div className='flex flex-col p-2'>
@@ -39,14 +40,8 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
             </p>
           </div>
           <div className='flex flex-col'>
-            <RadioButton
-              name='Off'
-              radioId='OFF'
-            />
-            <RadioButton
-              name='On'
-              radioId='ON'
-            />
+            <RadioButton name='Off' radioId='OFF' />
+            <RadioButton name='On' radioId='ON' />
           </div>
         </div>
       </div>

@@ -1,4 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, {
+  useState,
+  useRef,
+  ComponentType,
+  SVGProps,
+} from "react";
 import HeaderProfileBtn from "./HeaderProfileBtn";
 import {
   BellIcon,
@@ -13,7 +18,8 @@ import useClickOutside from "../hooks/useClickOutside";
 
 const HeaderRight: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const iconRef = useRef<any>(null);
+  const iconRef =
+    useRef<ComponentType<SVGProps<SVGSVGElement>>>(null);
 
   const handleClick = () => {
     setDropdownOpen((prevState) => !prevState);

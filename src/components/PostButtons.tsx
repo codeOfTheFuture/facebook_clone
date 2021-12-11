@@ -5,10 +5,12 @@ import PostButton from "./PostButton";
 interface PostButtonsProps {
   showComments: boolean;
   toggleComments: () => void;
+  likeButtonEnter: () => void;
+  likeButtonLeave: () => void;
 }
 
 const PostButtons: React.FC<PostButtonsProps> = (props) => {
-  const { showComments, toggleComments } = props;
+  const { showComments, toggleComments, likeButtonEnter, likeButtonLeave } = props;
 
   return (
     <div
@@ -20,6 +22,8 @@ const PostButtons: React.FC<PostButtonsProps> = (props) => {
         iconName='Like'
         rounded='rounded-bl-2xl'
         showComments={showComments}
+        likeButtonEnter={likeButtonEnter}
+        likeButtonLeave={likeButtonLeave}
       />
       <PostButton
         Icon={ChatAltIcon}

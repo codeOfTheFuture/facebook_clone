@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { ComponentType, SVGProps, useState } from "react";
 
 interface HeaderIconProps {
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  Icon: ComponentType<SVGProps<SVGSVGElement>>;
   iconClassName: string;
   iconContainerClassName?: string;
   tooltipClassName?: string;

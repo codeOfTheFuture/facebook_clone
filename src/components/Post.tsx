@@ -4,6 +4,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  Timestamp,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase.setup";
@@ -13,16 +14,34 @@ import LikeCommentCount from "./LikeCommentCount";
 import PostButtons from "./PostButtons";
 import PostHeader from "./PostHeader";
 import PostImage from "./PostImage";
+import Reactions from "./Reactions";
 
 interface PostProps {
   post: DocumentData;
 }
 
+interface PostData {
+  name: string;
+  image: string;
+  postImage: string;
+  timestamp: Timestamp;
+  message: string;
+}
+
 const Post: React.FC<PostProps> = ({ post }) => {
   const { id } = post,
-    { name, image, postImage, timestamp, message } = post.data(),
-    [showComments, setShowComments] = useState(false),
-    [comments, setComments] = useState<DocumentData[]>([]);
+    { name, image, postImage, timestamp, message }: PostData = post.data(),
+    [showComments, setShowComments] = useState<boolean>(false),
+    [comments, setComments] = useState<DocumentData[]>([]),
+    [likeButtonHover, setLikeButtonHover] = useState<boolean>(false);
+
+  const likeButtonEnter = (): void => {
+    setLikeButtonHover(true);
+  };
+
+  const likeButtonLeave = (): void => {
+    setLikeButtonHover(false);
+  };
 
   useEffect(
     () =>
@@ -39,7 +58,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
     [id, comments.length]
   );
 
-  const toggleComments = () => {
+  const toggleComments = (): void => {
     setShowComments((prevState) => !prevState);
   };
 
@@ -57,17 +76,27 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
       {postImage && <PostImage postImage={postImage} />}
 
-      {comments.length > 0 && (
-        <LikeCommentCount
-          commentCount={comments.length}
-          toggleComments={toggleComments}
-        />
-      )}
+      <div className='relative'>
+        {comments.length > 0 && (
+          <LikeCommentCount
+            commentCount={comments.length}
+            toggleComments={toggleComments}
+          />
+        )}
 
-      <PostButtons
-        showComments={showComments}
-        toggleComments={toggleComments}
-      />
+        <Reactions
+          likeButtonHover={likeButtonHover}
+          likeButtonEnter={likeButtonEnter}
+          likeButtonLeave={likeButtonLeave}
+        />
+
+        <PostButtons
+          showComments={showComments}
+          toggleComments={toggleComments}
+          likeButtonEnter={likeButtonEnter}
+          likeButtonLeave={likeButtonLeave}
+        />
+      </div>
 
       {showComments && (
         <div className='flex flex-col'>

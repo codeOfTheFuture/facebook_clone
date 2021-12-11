@@ -11,7 +11,7 @@ const Comments: React.FC<CommentsProps> = ({ comments }) => {
 
   return (
     <div className='w-full px-5 bg-white dark:bg-gray-700'>
-      {!showAllComments && comments.length ? (
+      {!showAllComments && comments.length > 2 ? (
         <div className='flex flex-col'>
           <p
             className='text-sm font-semibold text-gray-600 hover:underline cursor-pointer mt-2 dark:text-gray-200'

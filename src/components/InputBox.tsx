@@ -89,7 +89,7 @@ const InputBox: React.FC = () => {
   };
 
   return (
-    <form onSubmit={sendPost}>
+    <form onSubmit={sendPost} className="w-full">
       <div className='bg-white p-2 rounded-2xl shadow-md text-gray-500 font-medium mt-6 dark:bg-gray-700'>
         <div className='flex space-x-4 p-4 items-center'>
           {photoURL && (

@@ -8,14 +8,14 @@ interface StoryCardProps {
 
 const StoryCard: React.FC<StoryCardProps> = ({ name, src, profile }) => {
   return (
-    <div className='relative h-56 w-32 p-3 cursor-pointer lg:rounded-3xl overflow-x transition duration-200 transform ease-in hover:scale-105 hover:animate-pulse'>
+    <div className='lg:relative h-56 w-32 p-3 cursor-pointer rounded-3xl transition duration-200 transform ease-in hover:scale-105 hover:animate-pulse overscroll-auto'>
       <img
         className='hidden lg:block absolute top-20 left-0 lg:top-3 lg:left-3 lg:w-10 lg:h-10 rounded-full z-10 object-cover object-center border-2 border-blue-500'
         src={profile}
         alt='profile'
       />
       <img
-        className='absolute top-0 left-0 object-cover w-full h-full lg:rounded-3xl filter brightness-75'
+        className='absolute top-0 left-0 object-cover w-full h-full rounded-3xl filter brightness-75'
         src={src}
         alt='src'
       />
