@@ -12,6 +12,7 @@ interface HeaderDropdownButtonProps {
 
 const HeaderDropdownButton: React.FC<HeaderDropdownButtonProps> = (props) => {
   const { Icon, SecondaryIcon, clickHandler } = props;
+
   return (
     <div className={props.className} onClick={clickHandler}>
       <div className='flex items-center'>

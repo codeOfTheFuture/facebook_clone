@@ -20,6 +20,7 @@ export const checkFirebaseUser = async (
     getSnap = async (): Promise<DocumentSnapshot<DocumentData> | void> => {
       try {
         const docRef = doc(db, "users", uid);
+
         return await getDoc(docRef);
       } catch (error) {
         console.log(error);

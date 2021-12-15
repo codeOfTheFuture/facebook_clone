@@ -10,7 +10,8 @@ interface PostButtonsProps {
 }
 
 const PostButtons: React.FC<PostButtonsProps> = (props) => {
-  const { showComments, toggleComments, likeButtonEnter, likeButtonLeave } = props;
+  const { showComments, toggleComments, likeButtonEnter, likeButtonLeave } =
+    props;
 
   return (
     <div

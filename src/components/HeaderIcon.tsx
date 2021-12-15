@@ -7,21 +7,21 @@ interface HeaderIconProps {
   tooltipClassName?: string;
   tooltipName?: string;
   active?: boolean;
-  handleClick?: () => void;
   dropdownOpen?: boolean;
   iconRef?: any;
   Dropdown?: any;
   backBtn?: boolean;
+  handleClick?: () => void;
 }
 
 const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
   const [iconHover, setIconHover] = useState<boolean>(false);
 
-  const mouseEnter = () => {
+  const mouseEnter = (): void => {
     setIconHover(true);
   };
 
-  const mouseLeave = () => {
+  const mouseLeave = (): void => {
     setIconHover(false);
   };
 
@@ -35,7 +35,7 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
     dropdownOpen,
     iconRef,
     Dropdown,
-    backBtn
+    backBtn,
   } = props;
 
   return (

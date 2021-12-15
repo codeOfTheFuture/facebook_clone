@@ -18,7 +18,7 @@ const HeaderDropdownAccount: React.FC = () => {
   // Log out
   const history = useHistory();
 
-  const handleLogOut = async () => {
+  const handleLogOut = async (): Promise<void> => {
     try {
       await logOut();
       history.push("/login");
@@ -27,7 +27,7 @@ const HeaderDropdownAccount: React.FC = () => {
     }
   };
 
-  const displayOpen = () => {
+  const displayOpen = (): void => {
     setDisplayOptionsOpen((prevState) => !prevState);
   };
 

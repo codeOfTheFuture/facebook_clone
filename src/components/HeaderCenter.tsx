@@ -11,37 +11,37 @@ const HeaderCenter: React.FC = () => {
           Icon={HomeIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
-          tooltipClassName={'toolTipCenter'}
-          tooltipName={'Home'}
+          tooltipClassName={"toolTipCenter"}
+          tooltipName={"Home"}
           active
         />
         <HeaderIcon
           Icon={FlagIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
-          tooltipClassName={'toolTipCenter'}
-          tooltipName={'Pages'}
+          tooltipClassName={"toolTipCenter"}
+          tooltipName={"Pages"}
         />
         <HeaderIcon
           Icon={PlayIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
-          tooltipClassName={'toolTipCenter'}
-          tooltipName={'Watch'}
+          tooltipClassName={"toolTipCenter"}
+          tooltipName={"Watch"}
         />
         <HeaderIcon
           Icon={UserGroupIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
-          tooltipClassName={'toolTipCenter'}
-          tooltipName={'Groups'}
+          tooltipClassName={"toolTipCenter"}
+          tooltipName={"Groups"}
         />
         <HeaderIcon
           Icon={CubeIcon}
           iconClassName={"headerIconCenter"}
           iconContainerClassName={"headerIconContainer"}
-          tooltipClassName={'toolTipCenter'}
-          tooltipName={'Gaming'}
+          tooltipClassName={"toolTipCenter"}
+          tooltipName={"Gaming"}
         />
       </div>
     </div>

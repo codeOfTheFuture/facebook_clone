@@ -8,16 +8,18 @@ interface DropdownDisplayProps {
 }
 
 const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
+  const { displayOptionsOpen, clickHandler } = props;
+
   return (
     <div
-      className={`absolute flex flex-col items-center w-full h-full p-4 bg-white top-0 -right-96 z-20 ${props.displayOptionsOpen && "left-0"
+      className={`absolute flex flex-col items-center w-full h-full p-4 bg-white top-0 -right-96 z-20 ${displayOptionsOpen && "left-0"
         } dark:bg-gray-700 dark:text-gray-200`}
     >
       <div className='flex w-full items-center'>
         <HeaderIcon
           Icon={ArrowLeftIcon}
           iconClassName='headerIconBack'
-          handleClick={props.clickHandler}
+          handleClick={clickHandler}
           backBtn={true}
         />
         <h1 className='text-xl font-bold text-center ml-4'>

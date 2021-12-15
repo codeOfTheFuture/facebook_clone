@@ -24,19 +24,17 @@ const InputBox: React.FC = () => {
     filePickerRef = useRef<HTMLInputElement>(null),
     [imageToPost, setImageToPost] = useState<string | null>(null);
 
-  // Set image state back to null
-  const removeImage = () => {
+  const removeImage = (): void => {
     setImageToPost(null);
   };
 
   // Send Post
-  const sendPost = async (e: FormEvent) => {
+  const sendPost = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
     if (!inputRef.current!.value) return;
 
     try {
-      // Adds a new doc to firestore db collection `posts` as a promise
       const newDoc = await addDoc(collection(db, "posts"), {
         message: inputRef.current!.value,
         name: user?.displayName,
@@ -45,21 +43,12 @@ const InputBox: React.FC = () => {
         timestamp: serverTimestamp(),
       });
 
-      // If an image has been set in state
       if (imageToPost) {
-        // Creates a reference for storage bucket
         const storageRef = ref(storage, `posts/${newDoc.id}`);
-
-        // Returns an upload task as a promise
         await uploadString(storageRef, imageToPost, "data_url");
-
-        // Gets a download url as a promise
         const url = await getDownloadURL(storageRef);
-
-        // Creates a reference to the doc just created
         const postsRef = doc(db, "posts", newDoc.id);
 
-        // Updates doc with url from storage bucket as a promise
         await setDoc(
           postsRef,
           {
@@ -77,7 +66,7 @@ const InputBox: React.FC = () => {
   };
 
   // Add Image to Post
-  const addImageToPost = (e: ChangeEvent<HTMLInputElement>) => {
+  const addImageToPost = (e: ChangeEvent<HTMLInputElement>): void => {
     const reader = new FileReader();
     if (e.target.files![0]) {
       reader.readAsDataURL(e.target.files![0]);
@@ -89,7 +78,7 @@ const InputBox: React.FC = () => {
   };
 
   return (
-    <form onSubmit={sendPost} className="w-full">
+    <form onSubmit={sendPost} className='w-full'>
       <div className='bg-white p-2 rounded-2xl shadow-md text-gray-500 font-medium mt-6 dark:bg-gray-700'>
         <div className='flex space-x-4 p-4 items-center'>
           {photoURL && (

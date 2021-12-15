@@ -35,14 +35,6 @@ const Post: React.FC<PostProps> = ({ post }) => {
     [comments, setComments] = useState<DocumentData[]>([]),
     [likeButtonHover, setLikeButtonHover] = useState<boolean>(false);
 
-  const likeButtonEnter = (): void => {
-    setLikeButtonHover(true);
-  };
-
-  const likeButtonLeave = (): void => {
-    setLikeButtonHover(false);
-  };
-
   useEffect(
     () =>
       onSnapshot(
@@ -57,6 +49,14 @@ const Post: React.FC<PostProps> = ({ post }) => {
       ),
     [id, comments.length]
   );
+
+  const likeButtonEnter = (): void => {
+    setLikeButtonHover(true);
+  };
+
+  const likeButtonLeave = (): void => {
+    setLikeButtonHover(false);
+  };
 
   const toggleComments = (): void => {
     setShowComments((prevState) => !prevState);
@@ -85,6 +85,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
         )}
 
         <Reactions
+          postId={id}
           likeButtonHover={likeButtonHover}
           likeButtonEnter={likeButtonEnter}
           likeButtonLeave={likeButtonLeave}

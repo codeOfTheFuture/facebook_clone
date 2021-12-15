@@ -9,7 +9,10 @@ const App: React.FC = () => {
   const { darkModeEnabled } = useUserProfile();
 
   return (
-    <div className={`App ${darkModeEnabled && 'dark'}`} data-test='component-app'>
+    <div
+      className={`App ${darkModeEnabled && "dark"}`}
+      data-test='component-app'
+    >
       <Switch>
         <ProtectedRoute exact path='/' component={Home} />
         <Route path='/login' render={() => <Login />} />

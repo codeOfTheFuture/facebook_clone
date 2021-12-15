@@ -21,11 +21,11 @@ const HeaderRight: React.FC = () => {
   const iconRef =
     useRef<ComponentType<SVGProps<SVGSVGElement>>>(null);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     setDropdownOpen((prevState) => !prevState);
   };
 
-  useClickOutside(iconRef, () => {
+  useClickOutside(iconRef, (): void => {
     setDropdownOpen(false);
   });
 

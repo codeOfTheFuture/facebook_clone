@@ -9,7 +9,7 @@ const LikeCommentCount: React.FC<LikeCommentCountProps> = (props) => {
   const { commentCount, toggleComments } = props;
 
   return (
-    <div className='flex items-center justify-between bg-white p-3 text-sm text-gray-400 dark:bg-gray-700 dark:text-gray-200'>
+    <div className='flex items-center justify-between shadow-none bg-white p-3 text-sm text-gray-400 dark:bg-gray-700 dark:text-gray-200'>
       <div>
         <p>1 Like</p>
       </div>

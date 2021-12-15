@@ -9,7 +9,10 @@ export const UserProfileProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(UserProfileReducer, initialState),
     ACTIONS = { DARKMODETOGGLE: "DARKMODETOGGLE" };
 
-  const darkModeToggle = async (uid: string, darkModeEnabled: boolean) => {
+  const darkModeToggle = async (
+    uid: string,
+    darkModeEnabled: boolean
+  ): Promise<void> => {
     const userProfileRef = doc(db, "users", uid);
 
     await updateDoc(userProfileRef, {

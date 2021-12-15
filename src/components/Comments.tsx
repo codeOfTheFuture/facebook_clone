@@ -7,7 +7,7 @@ interface CommentsProps {
 }
 
 const Comments: React.FC<CommentsProps> = ({ comments }) => {
-  const [showAllComments, setShowAllComments] = useState(false);
+  const [showAllComments, setShowAllComments] = useState<boolean>(false);
 
   return (
     <div className='w-full px-5 bg-white dark:bg-gray-700'>

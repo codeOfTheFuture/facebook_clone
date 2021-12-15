@@ -1,13 +1,22 @@
 import React from "react";
 import Moment from "react-moment";
-import { DocumentData } from "firebase/firestore";
+import { DocumentData, Timestamp } from "firebase/firestore";
 
 interface CommentProps {
   commentData: DocumentData;
 }
 
+interface CommentData {
+  name: string;
+  comment: string;
+  image: string;
+  commentImage: string;
+  timestamp: Timestamp;
+}
+
 const Comment: React.FC<CommentProps> = ({ commentData }) => {
-  const { comment, timestamp, image, name, commentImage } = commentData.data();
+  const { name, comment, image, commentImage, timestamp }: CommentData =
+    commentData.data();
 
   return (
     <div className='flex mt-4'>

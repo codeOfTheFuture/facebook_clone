@@ -26,7 +26,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   );
 
   useEffect(() => {
-    const getProfile = async () => {
+    const getProfile = async (): Promise<void> => {
       const docRef = doc(db, "users", user?.uid!),
         docSnap = await getDoc(docRef);
       if (docSnap.exists()) setPhotoURL(docSnap.data().photoURL);

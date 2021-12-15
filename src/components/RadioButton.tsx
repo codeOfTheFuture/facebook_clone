@@ -11,7 +11,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({ name, radioId }) => {
   const { user } = useAuth(),
     { darkModeEnabled, darkModeToggle } = useUserProfile();
 
-  const handleClick = () =>
+  const handleClick = (): Promise<void> | null =>
     radioId === "ON"
       ? user && darkModeToggle(user.uid, true)
       : user && darkModeToggle(user.uid, false);

@@ -7,7 +7,7 @@ const Login: React.FC = () => {
   const history = useHistory<History>();
 
   // Handle Sign In
-  const handleSignIn = async (e: FormEvent) => {
+  const handleSignIn = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       await signInWithFacebook();

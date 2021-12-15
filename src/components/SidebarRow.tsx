@@ -11,7 +11,7 @@ const SidebarRow: React.FC<SidebarRowProps> = ({
   Icon,
   title,
   photoURL,
-  displayName
+  displayName,
 }) => {
   return (
     <div className='flex items-center space-x-2 p-4 hover:bg-gray-200 rounded-xl cursor-pointer dark:text-gray-200 dark:hover:bg-gray-600'>
@@ -22,14 +22,16 @@ const SidebarRow: React.FC<SidebarRowProps> = ({
           height={30}
           src={photoURL}
           alt='Profile'
-        />)}
+        />
+      )}
 
       {Icon && <Icon className='h-8 w-8 text-blue-500' />}
 
-      {(displayName || title) && <p className='hidden sm:inline-flex font-medium'>
-        {displayName || title}
-      </p>}
-
+      {(displayName || title) && (
+        <p className='hidden sm:inline-flex font-medium'>
+          {displayName || title}
+        </p>
+      )}
     </div>
   );
 };

@@ -11,9 +11,18 @@ const Widgets: React.FC = () => {
       <div className='flex justify-between items-center text-gray-500 mb-5'>
         <h2 className='text-xl dark:text-gray-200'>Contacts</h2>
         <div className='flex space-x-2'>
-          <VideoCameraIcon className='cursor-pointer dark:text-gray-200' height={15} />
-          <SearchIcon className='cursor-pointer dark:text-gray-200' height={15} />
-          <DotsHorizontalIcon className='cursor-pointer dark:text-gray-200' height={15} />
+          <VideoCameraIcon
+            className='cursor-pointer dark:text-gray-200'
+            height={15}
+          />
+          <SearchIcon
+            className='cursor-pointer dark:text-gray-200'
+            height={15}
+          />
+          <DotsHorizontalIcon
+            className='cursor-pointer dark:text-gray-200'
+            height={15}
+          />
         </div>
       </div>
 

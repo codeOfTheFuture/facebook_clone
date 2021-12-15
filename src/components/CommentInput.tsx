@@ -50,24 +50,17 @@ const CommentInput: React.FC<CommentInputProps> = (props) => {
         timestamp: serverTimestamp(),
       });
 
-      // If an image has been set in state
       if (imageToComment) {
-        // Creates a reference for storage bucket
         const storageRef = ref(
           storage,
           `posts/${postId}/comments/${newDoc.id}`
         );
 
-        // Returns an upload task as a promise
         await uploadString(storageRef, imageToComment, "data_url");
 
-        // Gets a download url as a promise
-        const url = await getDownloadURL(storageRef);
+        const url = await getDownloadURL(storageRef),
+          commentsRef = doc(db, "posts", postId, "comments", newDoc.id);
 
-        // Creates a reference to the doc just created
-        const commentsRef = doc(db, "posts", postId, "comments", newDoc.id);
-
-        // Updates doc with url from storage bucket as a promise
         await setDoc(
           commentsRef,
           {
@@ -117,7 +110,6 @@ const CommentInput: React.FC<CommentInputProps> = (props) => {
         {imageToComment && (
           <div className='flex h-6 cursor-pointer mr-2' onClick={removeImage}>
             <img src={imageToComment} alt='Comment' className='object-cover' />
-            {/* <p className="text-xs">Remove</p> */}
           </div>
         )}
       </form>
