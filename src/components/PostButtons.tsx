@@ -3,14 +3,16 @@ import React from "react";
 import PostButton from "./PostButton";
 
 interface PostButtonsProps {
-  showComments: boolean;
+  addReaction: () => Promise<void>;
   toggleComments: () => void;
   likeButtonEnter: () => void;
   likeButtonLeave: () => void;
+  showComments: boolean;
+  userLikedPost: boolean;
 }
 
 const PostButtons: React.FC<PostButtonsProps> = (props) => {
-  const { showComments, toggleComments, likeButtonEnter, likeButtonLeave } =
+  const { addReaction, toggleComments, likeButtonEnter, likeButtonLeave, showComments, userLikedPost } =
     props;
 
   return (
@@ -25,6 +27,8 @@ const PostButtons: React.FC<PostButtonsProps> = (props) => {
         showComments={showComments}
         likeButtonEnter={likeButtonEnter}
         likeButtonLeave={likeButtonLeave}
+        addReaction={addReaction}
+        userLikedPost={userLikedPost}
       />
       <PostButton
         Icon={ChatAltIcon}

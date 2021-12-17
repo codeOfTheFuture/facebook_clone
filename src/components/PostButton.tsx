@@ -4,10 +4,12 @@ interface PostButtonProps {
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   iconName: string;
   rounded: string;
+  addReaction?: () => Promise<void>;
   toggleComments?: () => void;
   likeButtonEnter?: () => void;
   likeButtonLeave?: () => void;
   showComments: boolean;
+  userLikedPost?: boolean;
 }
 
 const PostButton: React.FC<PostButtonProps> = (props) => {
@@ -19,12 +21,19 @@ const PostButton: React.FC<PostButtonProps> = (props) => {
     toggleComments,
     likeButtonEnter,
     likeButtonLeave,
+    addReaction,
+    userLikedPost,
   } = props;
 
+  console.log(userLikedPost);
   return (
     <div
-      className={`inputIcon rounded-none ${!showComments && rounded}`}
-      onClick={toggleComments && toggleComments}
+      className={`inputIcon rounded-none ${!showComments && rounded} ${userLikedPost && "text-blue-500"
+        }`}
+      onClick={
+        (toggleComments && toggleComments) ||
+        (addReaction && (() => addReaction()))
+      }
       onMouseEnter={likeButtonEnter && likeButtonEnter}
       onMouseLeave={likeButtonLeave && likeButtonLeave}
     >

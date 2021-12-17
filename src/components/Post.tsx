@@ -1,20 +1,26 @@
 import {
   collection,
+  deleteDoc,
+  doc,
   DocumentData,
+  getDoc,
   onSnapshot,
   orderBy,
   query,
+  setDoc,
   Timestamp,
+  updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase.setup";
 import CommentInput from "./CommentInput";
 import Comments from "./Comments";
-import LikeCommentCount from "./LikeCommentCount";
+import ReactionCommentCount from "./ReactionCommentCount";
 import PostButtons from "./PostButtons";
 import PostHeader from "./PostHeader";
 import PostImage from "./PostImage";
 import Reactions from "./Reactions";
+import { useAuth } from "../context/AuthContext";
 
 interface PostProps {
   post: DocumentData;
@@ -30,10 +36,13 @@ interface PostData {
 
 const Post: React.FC<PostProps> = ({ post }) => {
   const { id } = post,
+    { user } = useAuth(),
     { name, image, postImage, timestamp, message }: PostData = post.data(),
     [showComments, setShowComments] = useState<boolean>(false),
+    [reactions, setReactions] = useState<DocumentData[]>([]),
     [comments, setComments] = useState<DocumentData[]>([]),
-    [likeButtonHover, setLikeButtonHover] = useState<boolean>(false);
+    [likeButtonHover, setLikeButtonHover] = useState<boolean>(false),
+    [userLikedPost, setUserLikedPost] = useState<boolean>(false);
 
   useEffect(
     () =>
@@ -50,6 +59,21 @@ const Post: React.FC<PostProps> = ({ post }) => {
     [id, comments.length]
   );
 
+  useEffect(
+    () =>
+      onSnapshot(
+        collection(db, "posts", id, "reactions"),
+        (snapshot: DocumentData) => {
+          setUserLikedPost(false);
+          snapshot.docs.forEach((reaction: DocumentData) => {
+            if (reaction.data().uid === user?.uid) setUserLikedPost(true);
+          });
+          setReactions(snapshot.docs);
+        }
+      ),
+    [id, user?.uid]
+  );
+
   const likeButtonEnter = (): void => {
     setLikeButtonHover(true);
   };
@@ -60,6 +84,27 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
   const toggleComments = (): void => {
     setShowComments((prevState) => !prevState);
+  };
+
+  const addReaction = async (reactionType: string = ''): Promise<void> => {
+    likeButtonLeave();
+
+    const docRef = doc(db, "posts", id, "reactions", user!.uid),
+      docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const reaction = docSnap.data();
+
+      return (reaction.reactionType === reactionType) || !reactionType
+        ? await deleteDoc(docRef)
+        : await updateDoc(docRef, { reactionType: reactionType });
+    }
+
+    return await setDoc(doc(db, "posts", id, "reactions", user!.uid), {
+      uid: user!.uid,
+      displayName: user!.displayName,
+      reactionType: reactionType || 'like',
+    });
   };
 
   return (
@@ -77,21 +122,24 @@ const Post: React.FC<PostProps> = ({ post }) => {
       {postImage && <PostImage postImage={postImage} />}
 
       <div className='relative'>
-        {comments.length > 0 && (
-          <LikeCommentCount
+        {(comments.length > 0 || reactions.length > 0) && (
+          <ReactionCommentCount
+            reactions={reactions}
             commentCount={comments.length}
             toggleComments={toggleComments}
           />
         )}
 
         <Reactions
-          postId={id}
+          addReaction={addReaction}
           likeButtonHover={likeButtonHover}
           likeButtonEnter={likeButtonEnter}
           likeButtonLeave={likeButtonLeave}
         />
 
         <PostButtons
+          addReaction={addReaction}
+          userLikedPost={userLikedPost}
           showComments={showComments}
           toggleComments={toggleComments}
           likeButtonEnter={likeButtonEnter}
