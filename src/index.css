@@ -24,7 +24,7 @@
   }
 
   .toolTip {
-    @apply hidden md:inline-block absolute top-8 p-1 rounded-md text-xs text-center text-white bg-black opacity-70 dark:bg-gray-200 dark:text-black;
+    @apply hidden md:inline-block absolute top-8 p-1 mt-5 z-20 rounded-md text-xs text-center text-white bg-black opacity-70 dark:bg-gray-200 dark:text-black;
   }
 
   .toolTipCenterRight {

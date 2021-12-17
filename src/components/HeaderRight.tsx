@@ -39,7 +39,7 @@ const HeaderRight: React.FC = () => {
         iconClassName={"menuIcon"}
         iconContainerClassName={"menuIconContainer"}
         tooltipClassName={"toolTipCenter"}
-        tooltipName={"Home"}
+        toolTipName={"Home"}
       />
 
       <HeaderProfileBtn />
@@ -47,23 +47,23 @@ const HeaderRight: React.FC = () => {
       <HeaderIcon
         Icon={ViewGridIcon}
         iconClassName={"headerIconRight"}
-        tooltipName={"Menu"}
+        toolTipName={"Menu"}
       />
       <HeaderIcon
         Icon={ChatIcon}
         iconClassName={"headerIconRight"}
-        tooltipName={"Messenger"}
+        toolTipName={"Messenger"}
       />
       <HeaderIcon
         Icon={BellIcon}
         iconClassName={"headerIconRight"}
-        tooltipName={"Notifications"}
+        toolTipName={"Notifications"}
         handleClick={handleClick}
       />
       <HeaderIcon
         Icon={ChevronDownIcon}
         iconClassName={"headerIconRight"}
-        tooltipName={"Account"}
+        toolTipName={"Account"}
         handleClick={handleClick}
         dropdownOpen={dropdownOpen}
         iconRef={iconRef}

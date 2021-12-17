@@ -1,11 +1,12 @@
 import React, { ComponentType, SVGProps, useState } from "react";
+import ToolTip from "./ToolTip";
 
 interface HeaderIconProps {
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
   iconClassName: string;
   iconContainerClassName?: string;
   tooltipClassName?: string;
-  tooltipName?: string;
+  toolTipName: string;
   active?: boolean;
   dropdownOpen?: boolean;
   iconRef?: any;
@@ -30,12 +31,11 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
     active,
     iconClassName,
     iconContainerClassName,
-    tooltipName,
+    toolTipName,
     handleClick,
     dropdownOpen,
     iconRef,
     Dropdown,
-    backBtn,
   } = props;
 
   return (
@@ -54,9 +54,12 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
           className={`${iconClassName} ${(active || dropdownOpen) && "text-blue-500 dark:text-blue-500"
             }`}
         />
-        {iconHover && !dropdownOpen && !backBtn && (
-          <span className='toolTip mt-5 z-20'>{tooltipName}</span>
+
+        {/* {iconHover && !dropdownOpen && !backBtn && ( */}
+        {toolTipName && (
+          <ToolTip toolTipName={toolTipName} iconHover={iconHover} />
         )}
+        {/* )} */}
       </div>
 
       {dropdownOpen && <Dropdown />}

@@ -21,6 +21,7 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
           iconClassName='headerIconBack'
           handleClick={clickHandler}
           backBtn={true}
+          toolTipName={''}
         />
         <h1 className='text-xl font-bold text-center ml-4'>
           Display & Accessibility
