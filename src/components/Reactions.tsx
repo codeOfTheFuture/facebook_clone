@@ -14,7 +14,7 @@ const Reactions: React.FC<ReactionsProps> = (props) => {
 
   return (
     <div
-      className={`flex items-center absolute transform translate-y-0 opacity-0 bottom-0 left-0 bg-white dark:bg-gray-600 rounded-2xl border transition-transform ease-out delay-500 duration-500 ${likeButtonHover && "transform -translate-y-10 opacity-100"
+      className={`flex items-center absolute transform translate-y-0 opacity-0 bottom-0 left-0 bg-white dark:bg-gray-600 rounded-2xl border transition-transform ease-out delay-300 duration-500 pointer-events-none ${likeButtonHover && "transform -translate-y-10 opacity-100 pointer-events-auto"
         }`}
       onMouseEnter={() => likeButtonEnter()}
       onMouseLeave={() => likeButtonLeave()}

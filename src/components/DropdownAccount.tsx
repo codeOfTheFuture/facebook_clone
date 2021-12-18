@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import HeaderDropdownButton from "./HeaderDropdownButton";
 import {
   AnnotationIcon,
@@ -12,9 +12,15 @@ import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import DropdownDisplay from "./DropdownDisplay";
 
-const HeaderDropdownAccount: React.FC = () => {
+interface DropdownAccountProps {
+  dropdownOpen: boolean;
+  displayOpen: () => void;
+  displayOptionsOpen: boolean;
+}
+
+const DropdownAccount: React.FC<DropdownAccountProps> = (props) => {
+  const { dropdownOpen, displayOpen, displayOptionsOpen } = props;
   const { user, photoURL, logOut } = useAuth();
-  const [displayOptionsOpen, setDisplayOptionsOpen] = useState(false);
   // Log out
   const history = useHistory();
 
@@ -27,19 +33,19 @@ const HeaderDropdownAccount: React.FC = () => {
     }
   };
 
-  const displayOpen = (): void => {
-    setDisplayOptionsOpen((prevState) => !prevState);
-  };
-
   return (
-    <div className='absolute inline-block top-10 mt-2 right-0 p-2 border border-gray-200 bg-white rounded-lg shadow-lg z-10 overflow-x-hidden dark:bg-gray-700 dark:border-gray-700'>
+    <div
+      className={`absolute transition-all ease-in-out duration-200 opacity-0 top-10 right-0 mt-2 p-2 border border-gray-200 bg-white rounded-lg overflow-x-hidden shadow-lg dark:bg-gray-700 dark:border-gray-700 ${dropdownOpen && "opacity-100"
+        }`}
+    >
       <div className='relative'>
-        {user?.displayName && (<HeaderDropdownButton
-          className='dropdownProfileBtn'
-          img={photoURL}
-          heading={user?.displayName}
-          text='See your profile'
-        />
+        {user?.displayName && (
+          <HeaderDropdownButton
+            className='dropdownProfileBtn'
+            img={photoURL}
+            heading={user?.displayName}
+            text='See your profile'
+          />
         )}
         <hr />
         <HeaderDropdownButton
@@ -83,4 +89,4 @@ const HeaderDropdownAccount: React.FC = () => {
   );
 };
 
-export default HeaderDropdownAccount;
+export default DropdownAccount;

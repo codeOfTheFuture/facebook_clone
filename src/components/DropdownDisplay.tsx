@@ -12,8 +12,7 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
 
   return (
     <div
-      className={`absolute flex flex-col items-center w-full h-full p-4 bg-white top-0 -right-96 z-20 ${displayOptionsOpen && "left-0"
-        } dark:bg-gray-700 dark:text-gray-200`}
+      className={`absolute flex flex-col items-center w-full h-full p-4 bg-white rounded-lg top-0 left-0 dark:bg-gray-700 dark:text-gray-200 transition-all duration-200 ease-in transform translate-x-96 ${displayOptionsOpen && 'translate-x-0'}`}
     >
       <div className='flex w-full items-center'>
         <HeaderIcon
@@ -21,7 +20,7 @@ const DropdownDisplay: React.FC<DropdownDisplayProps> = (props) => {
           iconClassName='headerIconBack'
           handleClick={clickHandler}
           backBtn={true}
-          toolTipName={''}
+          toolTipName={""}
         />
         <h1 className='text-xl font-bold text-center ml-4'>
           Display & Accessibility

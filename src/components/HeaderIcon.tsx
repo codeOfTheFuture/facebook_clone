@@ -10,7 +10,6 @@ interface HeaderIconProps {
   active?: boolean;
   dropdownOpen?: boolean;
   iconRef?: any;
-  Dropdown?: any;
   backBtn?: boolean;
   handleClick?: () => void;
 }
@@ -35,7 +34,6 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
     handleClick,
     dropdownOpen,
     iconRef,
-    Dropdown,
   } = props;
 
   return (
@@ -61,8 +59,6 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
         )}
         {/* )} */}
       </div>
-
-      {dropdownOpen && <Dropdown />}
     </div>
   );
 };

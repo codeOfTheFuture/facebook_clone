@@ -1,8 +1,8 @@
 import React, {
-  useState,
   useRef,
   ComponentType,
   SVGProps,
+  useState,
 } from "react";
 import HeaderProfileBtn from "./HeaderProfileBtn";
 import {
@@ -13,19 +13,19 @@ import {
   MenuIcon,
 } from "@heroicons/react/solid";
 import HeaderIcon from "./HeaderIcon";
-import HeaderDropdownAccount from "./HeaderDropdownAccount";
+import DropDown from "./DropDown";
 import useClickOutside from "../hooks/useClickOutside";
 
 const HeaderRight: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const iconRef =
-    useRef<ComponentType<SVGProps<SVGSVGElement>>>(null);
+
+  const dropDownRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (): void => {
     setDropdownOpen((prevState) => !prevState);
   };
 
-  useClickOutside(iconRef, (): void => {
+  useClickOutside(dropDownRef, (): void => {
     setDropdownOpen(false);
   });
 
@@ -58,17 +58,22 @@ const HeaderRight: React.FC = () => {
         Icon={BellIcon}
         iconClassName={"headerIconRight"}
         toolTipName={"Notifications"}
-        handleClick={handleClick}
       />
-      <HeaderIcon
+
+      <DropDown
+        Icon={ChevronDownIcon}
+        handleClick={handleClick}
+        dropDownRef={dropDownRef}
+        dropdownOpen={dropdownOpen}
+      />
+      {/* <HeaderIcon
         Icon={ChevronDownIcon}
         iconClassName={"headerIconRight"}
         toolTipName={"Account"}
         handleClick={handleClick}
         dropdownOpen={dropdownOpen}
         iconRef={iconRef}
-        Dropdown={HeaderDropdownAccount}
-      />
+      /> */}
     </div>
   );
 };
