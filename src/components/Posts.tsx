@@ -22,7 +22,7 @@ const Posts: React.FC = () => {
   );
 
   return (
-    <div className='w-3/4 sm:w-full mx-1 sm:mx-0'>
+    <div className='w-full mx-1 sm:mx-0'>
       {posts?.map((post: DocumentData) => (
         <Post key={post.id} post={post} />
       ))}

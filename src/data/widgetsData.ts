@@ -1,23 +1,23 @@
 export const contacts = [
   {
     id: 0,
-    src: "https://links.papareact.com/f0p",
-    name: "Jeff Bezoz",
-  },
-  {
-    id: 1,
-    src: "https://links.papareact.com/kxk",
+    src: "images/contacts/elon-musk.jpg",
     name: "Elon Musk",
   },
   {
+    id: 1,
+    src: "images/contacts/keanu.png",
+    name: "Keanu Reeves",
+  },
+  {
     id: 2,
-    src: "https://links.papareact.com/zvy",
-    name: "Bill Gates",
+    src: "images/contacts/rogan.png",
+    name: "Joe Rogan",
   },
   {
     id: 3,
-    src: "https://links.papareact.com/snf",
-    name: "Mark Zuckerberg",
+    src: "images/contacts/jeter.png",
+    name: "Derek Jeter",
   },
   {
     id: 4,

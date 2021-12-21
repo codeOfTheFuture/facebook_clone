@@ -7,13 +7,14 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ src, name }) => {
   return (
-    <div className='flex items-center space-x-3 mb-2 relative hover:bg-gray-200 cursor-pointer p-2 rounded-xl dark:text-gray-200 dark:hover:bg-gray-600'>
-      <img
-        className='rounded-full object-cover w-12 h-12'
-        src={src}
-        alt={`Contact-${name}`}
-        style={{ width: "50px", height: "50px" }}
-      />
+    <div className='relative flex items-center space-x-4 mb-4 p-2 rounded-xl cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-200'>
+      <div className='rounded-full w-14 h-14'>
+        <img
+          className='rounded-full object-cover w-full h-full'
+          src={src}
+          alt={`Contact-${name}`}
+        />
+      </div>
       <p>{name}</p>
       <div className='absolute bottom-2 left-7 bg-green-400 h-3 w-3 rounded-full' />
     </div>
@@ -21,3 +22,5 @@ const Contact: React.FC<ContactProps> = ({ src, name }) => {
 };
 
 export default Contact;
+
+// flex items-center space-x-3 mb-8 py-2 relative hover:bg-gray-200 cursor-pointer rounded-xl dark:text-gray-200 dark:hover:bg-gray-600

@@ -35,7 +35,7 @@ const DropdownAccount: React.FC<DropdownAccountProps> = (props) => {
 
   return (
     <div
-      className={`absolute transition-all ease-in-out duration-200 opacity-0 top-10 right-0 mt-2 p-2 border border-gray-200 bg-white rounded-lg overflow-x-hidden shadow-lg dark:bg-gray-700 dark:border-gray-700 ${dropdownOpen && "opacity-100"
+      className={`absolute transition-all ease-in-out duration-200 opacity-0 top-10 right-0 mt-2 p-2 border border-gray-200 bg-white rounded-lg overflow-x-hidden shadow-lg pointer-events-none dark:bg-gray-700 dark:border-gray-700 ${dropdownOpen && "opacity-100 pointer-events-auto"
         }`}
     >
       <div className='relative'>
