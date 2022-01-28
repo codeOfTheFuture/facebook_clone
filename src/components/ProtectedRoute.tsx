@@ -5,7 +5,6 @@ export const ProtectedRoute = (props: any) => {
   const { component: Component, ...rest } = props;
 
   const { user } = useAuth();
-  console.log(user);
 
   return (
     <Route

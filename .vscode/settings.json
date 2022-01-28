@@ -10,6 +10,7 @@
     "Elon",
     "firebaseapp",
     "firestore",
+    "GETDARKMODE",
     "GETUSER",
     "graywolfai",
     "hahas",
@@ -19,6 +20,10 @@
     "Rogan",
     "sads",
     "semibold",
+    "SETDARKMODE",
+    "SETLOADING",
+    "SETPHOTOURL",
+    "SETUSER",
     "tailwindcss",
     "wojtekmaj",
     "Zuckerberg"

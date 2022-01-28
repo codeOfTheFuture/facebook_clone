@@ -25,7 +25,6 @@ const PostButton: React.FC<PostButtonProps> = (props) => {
     userLikedPost,
   } = props;
 
-  console.log(userLikedPost);
   return (
     <div
       className={`inputIcon rounded-none ${!showComments && rounded} ${userLikedPost && "text-blue-500"

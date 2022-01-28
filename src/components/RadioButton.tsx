@@ -1,6 +1,5 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
-import { useUserProfile } from "../context/UserProfileContext";
 
 interface RadioButtonProps {
   name: string;
@@ -8,8 +7,7 @@ interface RadioButtonProps {
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({ name, radioId }) => {
-  const { user } = useAuth(),
-    { darkModeEnabled, darkModeToggle } = useUserProfile();
+  const { user, darkModeEnabled, darkModeToggle } = useAuth();
 
   const handleClick = (): Promise<void> | null =>
     radioId === "ON"

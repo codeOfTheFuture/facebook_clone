@@ -1,7 +1,5 @@
 import React, {
   useRef,
-  ComponentType,
-  SVGProps,
   useState,
 } from "react";
 import HeaderProfileBtn from "./HeaderProfileBtn";
@@ -66,14 +64,6 @@ const HeaderRight: React.FC = () => {
         dropDownRef={dropDownRef}
         dropdownOpen={dropdownOpen}
       />
-      {/* <HeaderIcon
-        Icon={ChevronDownIcon}
-        iconClassName={"headerIconRight"}
-        toolTipName={"Account"}
-        handleClick={handleClick}
-        dropdownOpen={dropdownOpen}
-        iconRef={iconRef}
-      /> */}
     </div>
   );
 };

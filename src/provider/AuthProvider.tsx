@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useEffect, useReducer } from "react";
+import { AuthContext, Context, initialState } from "../context/AuthContext";
 import { checkFirebaseUser } from "../helpers";
 import {
   getAuth,
@@ -9,33 +9,83 @@ import {
   User,
 } from "firebase/auth";
 import { auth, db } from "../firebase.setup";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, DocumentData, getDoc, updateDoc } from "firebase/firestore";
+
+const ACTIONS = {
+  SETUSER: "SETUSER",
+  GETUSER: "GETUSER",
+  SETLOADING: "SETLOADING",
+  SETPHOTOURL: "SETPHOTOURL",
+  SETDARKMODE: "SETDARKMODE",
+  DARKMODETOGGLE: "DARKMODETOGGLE",
+};
+
+interface Action {
+  type: string;
+  payload: any;
+}
+
+const reducer = (state: Context, action: Action): Context => {
+  switch (action.type) {
+    case ACTIONS.SETUSER:
+      return {
+        ...state,
+        user: action.payload
+      }
+    case ACTIONS.SETLOADING:
+      return {
+        ...state,
+        loading: action.payload
+      }
+    case ACTIONS.SETPHOTOURL:
+      return {
+        ...state,
+        photoURL: action.payload
+      }
+    case ACTIONS.DARKMODETOGGLE:
+      return {
+        ...state,
+        darkModeEnabled: action.payload,
+      };
+    case ACTIONS.SETDARKMODE:
+      return {
+        ...state,
+        darkModeEnabled: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null),
-    [loading, setLoading] = useState<boolean>(true),
-    [photoURL, setPhotoURL] = useState<string>("");
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(
     () =>
       auth.onAuthStateChanged((firebaseUser) => {
-        setUser(firebaseUser);
-        setLoading(false);
+        dispatch({ type: ACTIONS.SETUSER, payload: firebaseUser })
+        dispatch({ type: ACTIONS.SETLOADING, payload: false })
       }),
     []
   );
 
   useEffect(() => {
+    dispatch({ type: ACTIONS.SETLOADING, payload: true });
     const getProfile = async (): Promise<void> => {
-      const docRef = doc(db, "users", user?.uid!),
+      const docRef = doc(db, "users", state.user?.uid!),
         docSnap = await getDoc(docRef);
-      if (docSnap.exists()) setPhotoURL(docSnap.data().photoURL);
+      if (docSnap.exists()) {
+        dispatch({ type: ACTIONS.SETPHOTOURL, payload: docSnap.data().photoURL })
+        dispatch({ type: ACTIONS.SETDARKMODE, payload: docSnap.data().darkModeEnabled })
+        dispatch({ type: ACTIONS.SETLOADING, payload: false })
+      }
     };
-    user && getProfile();
-  }, [user]);
+    state.user && getProfile();
+  }, [state.user]);
 
   // Facebook sign in
   const signInWithFacebook = async (): Promise<void> => {
+    dispatch({ type: ACTIONS.SETLOADING, payload: true })
     const provider = new FacebookAuthProvider(),
       auth = getAuth(),
       userProfile = {
@@ -69,31 +119,46 @@ export const AuthProvider: React.FC = ({ children }) => {
         uid: userProfile.uid,
         photoDataURL: userProfile.photoURL,
       });
-      userDoc && setPhotoURL(userDoc.photoURL);
+      userDoc && dispatch({ type: ACTIONS.SETPHOTOURL, payload: userDoc.photoURL })
     } catch (error) {
       console.error(error);
     }
   };
 
   // Logout
-  const logOut = () => {
+  const logOut = async () => {
     const auth = getAuth();
 
-    return signOut(auth);
+    return await signOut(auth);
+  };
+
+  const darkModeToggle = async (
+    uid: string,
+    darkModeEnabled: boolean
+  ): Promise<void> => {
+    const userProfileRef = doc(db, "users", uid);
+
+    await updateDoc(userProfileRef, {
+      darkModeEnabled: darkModeEnabled,
+    });
+
+    const docRef = doc(db, "users", uid),
+      docSnap = await getDoc(docRef);
+
+    docSnap.exists() &&
+      dispatch({ type: ACTIONS.DARKMODETOGGLE, payload: docSnap.data().darkModeEnabled });
   };
 
   const value = {
-    user,
-    photoURL,
+    ...state,
+    darkModeToggle,
     signInWithFacebook,
     logOut,
   };
 
-  // console.log(photoURL);
-
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {!state.loading && children}
     </AuthContext.Provider>
   );
 };

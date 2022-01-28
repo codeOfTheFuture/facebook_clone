@@ -29,7 +29,7 @@ const ReactionTotal: React.FC<ReactionTotalProps> = (props) => {
   return (
     <div className='flex justify-center items-center'>
       {[likes, hearts, hahas, wows, sads, angrys].map((reaction, index) => (
-        <ReactionTotalIcon reaction={reaction} src={src[index]} />
+        <ReactionTotalIcon key={index} reaction={reaction} src={src[index]} />
       ))}
       {reactionsCount > 0 && (
         <p className='ml-1 text-sm cursor-pointer hover:underline'>{reactionsCount}</p>
