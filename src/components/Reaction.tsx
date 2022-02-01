@@ -11,6 +11,7 @@ const Reaction: React.FC<ReactionProps> = ({
   reactionType,
   addReaction,
 }) => {
+
   return (
     <div
       className='flex justify-center items-center w-10 h-10 cursor-pointer rounded-full hover:transform hover:scale-150 hover:transition-transform hover:duration-500'

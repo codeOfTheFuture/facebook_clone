@@ -44,8 +44,10 @@ const InputBox: React.FC = () => {
       });
 
       if (imageToPost) {
+        const temp = imageToPost;
+        removeImage();
         const storageRef = ref(storage, `posts/${newDoc.id}`);
-        await uploadString(storageRef, imageToPost, "data_url");
+        await uploadString(storageRef, temp, "data_url");
         const url = await getDownloadURL(storageRef);
         const postsRef = doc(db, "posts", newDoc.id);
 
@@ -62,7 +64,6 @@ const InputBox: React.FC = () => {
     }
 
     inputRef.current!.value = "";
-    removeImage();
   };
 
   // Add Image to Post

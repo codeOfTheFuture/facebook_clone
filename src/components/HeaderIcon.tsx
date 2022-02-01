@@ -53,11 +53,9 @@ const HeaderIcon: React.FC<HeaderIconProps> = (props) => {
             }`}
         />
 
-        {/* {iconHover && !dropdownOpen && !backBtn && ( */}
         {toolTipName && (
           <ToolTip toolTipName={toolTipName} iconHover={iconHover} />
         )}
-        {/* )} */}
       </div>
     </div>
   );

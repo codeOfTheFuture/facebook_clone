@@ -21,13 +21,13 @@ export const contacts = [
   },
   {
     id: 4,
-    src: "https://links.papareact.com/d0c",
-    name: "Harry Potter",
+    src: "images/contacts/josh-allen-bills.jpg",
+    name: "Josh Allen",
   },
   {
     id: 5,
-    src: "https://links.papareact.com/6gg",
-    name: "The Queen",
+    src: "images/contacts/emilia-clarke.png",
+    name: "Emilia Clarke",
   },
   {
     id: 6,

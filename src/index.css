@@ -47,7 +47,7 @@
   }
 
   .menuIconContainer {
-    @apply flex xl:hidden;
+    @apply flex cursor-pointer xl:hidden;
   }
 
   .menuIcon {

@@ -3,13 +3,12 @@ import { AuthContext, Context, initialState } from "../context/AuthContext";
 import { checkFirebaseUser } from "../helpers";
 import {
   getAuth,
-  signInWithPopup,
+  signInWithRedirect,
   FacebookAuthProvider,
-  signOut,
-  User,
+  signOut
 } from "firebase/auth";
 import { auth, db } from "../firebase.setup";
-import { doc, DocumentData, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const ACTIONS = {
   SETUSER: "SETUSER",
@@ -94,7 +93,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       };
 
     try {
-      const result = await signInWithPopup(auth, provider),
+      const result: any = await signInWithRedirect(auth, provider),
         credential = FacebookAuthProvider.credentialFromResult(result),
         accessToken = credential?.accessToken,
         endpoint = `https://graph.facebook.com/me?fields=picture.type(large)&access_token=${accessToken}`,
