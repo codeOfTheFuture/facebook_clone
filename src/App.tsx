@@ -11,7 +11,7 @@ const App: React.FC = () => {
       <Switch>
         <ProtectedRoute exact path='/' component={Home} />
         <Route path='/login' render={() => <Login />} />
-        <Route path='/privacy' render={() => <PrivacyPolicy />}
+        <Route path='/privacy' render={() => <PrivacyPolicy />} />
       </Switch>
     </div>
   );
