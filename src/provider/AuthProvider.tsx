@@ -3,7 +3,7 @@ import { AuthContext, Context, initialState } from "../context/AuthContext";
 import { checkFirebaseUser } from "../helpers";
 import {
   getAuth,
-  signInWithRedirect,
+  signInWithPopup,
   FacebookAuthProvider,
   signOut
 } from "firebase/auth";
@@ -93,7 +93,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       };
 
     try {
-      const result: any = await signInWithRedirect(auth, provider),
+      const result: any = await signInWithPopup(auth, provider),
         credential = FacebookAuthProvider.credentialFromResult(result),
         accessToken = credential?.accessToken,
         endpoint = `https://graph.facebook.com/me?fields=picture.type(large)&access_token=${accessToken}`,
