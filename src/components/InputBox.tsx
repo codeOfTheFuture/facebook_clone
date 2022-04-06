@@ -68,6 +68,7 @@ const InputBox: React.FC = () => {
 
   // Add Image to Post
   const addImageToPost = (e: ChangeEvent<HTMLInputElement>): void => {
+    setImageToPost(null);
     const reader = new FileReader();
     if (e.target.files![0]) {
       reader.readAsDataURL(e.target.files![0]);
