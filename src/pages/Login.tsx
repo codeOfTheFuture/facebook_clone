@@ -13,7 +13,7 @@ const Login: React.FC = () => {
       await signInWithFacebook();
       history.push("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -23,8 +23,8 @@ const Login: React.FC = () => {
     <div className='flex flex-col items-center h-screen' data-test='page-login'>
       <img
         className='object-contain my-8'
-        src='https://links.papareact.com/t4i'
-        alt='Facebook Logo'
+        src='/images/logo.png'
+        alt='Logo'
         height={400}
         width={400}
       />
